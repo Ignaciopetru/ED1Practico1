@@ -3,7 +3,6 @@
 #include "list.h"
 #include "sort.h"
 #include "comparacion.h"
-#include "lectura.h"
 
 int main()
 {
@@ -23,7 +22,8 @@ int main()
   mostrarDList(hola);
   destruirDList(hola);*/
   DList hola = lecturaYcreacionL("salida.txt");
-  mostrarList(hola);
+  mostrarDList(hola);
+
   return 0;
 }
 

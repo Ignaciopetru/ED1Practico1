@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
@@ -40,4 +40,4 @@ Persona* crearPersona(char* nombre, int edadE, char* lugar){
   return nueva;
 
 }
-
+*/
