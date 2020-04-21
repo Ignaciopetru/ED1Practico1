@@ -57,7 +57,7 @@ void destruirDList (DList lista){
 }
 
 void intercambiarDList(DNodo* a, DNodo* b){
-  int c = b->dato;
+  Persona * c = b->dato;
   b->dato = a->dato;
   a->dato = c;
 }
@@ -77,11 +77,10 @@ DList lecturaYcreacionL (const char *filename){
   // Se agrega el nodo a la lista
 
   agregarDNodo(&lista, crearPersona(nombre, edadE, lugar));
-
-
   }
 
-
+  free(nombre);
+  free(lugar);
   return lista;
 }
 

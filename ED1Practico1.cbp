@@ -31,10 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="DList.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="DList.h" />
 		<Unit filename="comparacion.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -43,6 +39,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lectura.h" />
+		<Unit filename="list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="list.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
