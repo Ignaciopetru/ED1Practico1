@@ -14,7 +14,8 @@ int main()
   DList a = lecturaYcreacionL("salida.txt");
   selectionSortDList(a,comparacion_nombre);
   mostrarDList(a);
-
+  destruirDList(hola, d);
+  destruirDList(a, d);
   return 0;
 }
 

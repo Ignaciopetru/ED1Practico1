@@ -3,7 +3,7 @@
 
  typedef struct _persona {
   char* nombre;
-  int edad;
+  long edad;
   char* lugarDeNacimiendo;
 } Persona;
 
@@ -18,11 +18,14 @@ typedef struct _DList{
   DNodo* primero;
 } DList;
 
+typedef void (* Destruir ) ( Persona * dato ) ;
+
 DList crearDList();
 DNodo* crearNodo(Persona* , DNodo*, DNodo*);
 void agregarDNodo(DList*, Persona*);
 void mostrarDList(DList);
-void destruirDList (DList);
+void d(Persona *);
+void destruirDList (DList, Destruir);
 void intercambiarDList(DNodo*, DNodo*);
 
 

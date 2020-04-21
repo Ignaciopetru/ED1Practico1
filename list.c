@@ -40,18 +40,24 @@ void mostrarDList(DList lista) {
 
   for(;Nsig != NULL; Nsig = Nsig->sig) {
 
-    printf("%s, %d, %s\n", Nsig->dato->nombre, Nsig->dato->edad, Nsig->dato->lugarDeNacimiendo);
+    printf("%s, %ld, %s\n", Nsig->dato->nombre, Nsig->dato->edad, Nsig->dato->lugarDeNacimiendo);
 
   }
 }
 
-void destruirDList (DList lista){
+void d(Persona * persona){
+  free(persona->nombre);
+  free(persona->lugarDeNacimiendo);
+  free(persona);
+}
+
+void destruirDList (DList lista, Destruir d){
   DNodo* proximo = lista.primero;
   DNodo* actual;
   for (; proximo != NULL ; ){
     actual = proximo;
     proximo = proximo->sig;
-    //Antes de liberar el puntero al nodo, liberar el contenido del nodo, con funcion typedef void (* Destruir ) ( void * dato ) ;
+    d(actual->dato);
     free (actual);
   }
 }
@@ -64,34 +70,33 @@ void intercambiarDList(DNodo* a, DNodo* b){
 
 DList lecturaYcreacionL (const char *filename){
   DList lista = crearDList();
-  char* nombre = malloc(sizeof(char)*200);
-  char edad[3];
-  char* lugar = malloc(sizeof(char)*200);
+
+  char* edad = malloc(sizeof(char)*3);
+
   FILE* fp;
   fp = fopen(filename, "r");
   for(;!feof(fp);){
+  char* nombre = malloc(sizeof(char)*200);
+  char* lugar = malloc(sizeof(char)*200);
   // Se lee la linea y almacena segun corresponde
-  fscanf(fp, "%200[^\,], %3[^\,], %200[^\n]\n", nombre, edad, lugar);
+  fscanf(fp, "%200[^,], %3[^,], %200[^\n]\n", nombre, edad, lugar);
   // Se transforma la edad de char a int para poder ser trabajada
-  int edadE = atoi(edad);
+  long edadE = strtol(edad, NULL, 10);
   // Se agrega el nodo a la lista
 
   agregarDNodo(&lista, crearPersona(nombre, edadE, lugar));
   }
-
-  free(nombre);
-  free(lugar);
+  free(edad);
   return lista;
 }
 
 
 Persona* crearPersona(char* nombre, int edadE, char* lugar){
   Persona* nueva = malloc(sizeof(Persona));
-  nueva->nombre = malloc(sizeof(char)*200);
-  strcpy(nueva->nombre, nombre);
+
+  nueva->nombre = nombre;
   nueva->edad = edadE;
-  nueva->lugarDeNacimiendo = malloc(sizeof(char)*200);
-  strcpy(nueva->lugarDeNacimiendo, lugar);
+  nueva->lugarDeNacimiendo = lugar;
 
   return nueva;
 
