@@ -9,35 +9,42 @@ DList dlist_crear() {
   return nueva;
 }
 
-DNodo* dnodo_crear(Persona* persona, DNodo*ant, DNodo*sig) {
+DNodo* dnodo_crear(void* dato, DNodo*ant, DNodo*sig) {
   // se pide memoria para la estructura nodo.
   DNodo* nuevo = malloc(sizeof(DNodo));
   // se establecen las variables.
   nuevo->ant = ant;
   nuevo->sig = sig;
-  nuevo->dato = persona;
+  nuevo->dato = dato;
   return nuevo;
 }
 
-void dnodo_agregar(DList* lista, Persona* persona) {
+void dnodo_agregar(DList* lista, void* dato) {
   if(lista->primero == NULL) {
     // Caso lista vacia.
-    DNodo* nuevo = dnodo_crear(persona, NULL, NULL);
+    DNodo* nuevo = dnodo_crear(dato, NULL, NULL);
     lista->primero = nuevo;
   } else {
     // Caso lista con elementos.
-    DNodo* nuevo = dnodo_crear(persona, NULL, lista->primero);
+    DNodo* nuevo = dnodo_crear(dato, NULL, lista->primero);
     lista->primero->ant = nuevo;
     lista->primero = nuevo;
   }
 }
 
-void dlist_mostrar(DList lista) {
+void m(Persona * persona){
+  printf("%s, %ld, %s\n",persona->nombre, persona->edad, persona->lugar);
+}
+
+void dlist_mostrar(DList lista, Mostrar m) {
   DNodo* Nsig = lista.primero;
   for(;Nsig != NULL; Nsig = Nsig->sig) {
-    printf("%s, %ld, %s\n", Nsig->dato->nombre, Nsig->dato->edad, Nsig->dato->lugar);
+    m(Nsig->dato);
+    //printf("%s, %ld, %s\n", Nsig->dato->nombre, Nsig->dato->edad, Nsig->dato->lugar);
   }
 }
+
+
 
 void persona_destruir(Persona * persona) {
   free(persona->nombre);

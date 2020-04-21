@@ -11,7 +11,7 @@
 // Estructura que representa un nodo en la lista enlazada,
 // cuyo dato es una personta
 typedef struct _DNodo {
-  Persona* dato;
+  void* dato;
   struct _DNodo* sig;
   struct _DNodo* ant;
 } DNodo;
@@ -23,17 +23,19 @@ typedef struct _DList{
 
 // Tipo de la funcion destruir, para cada tipo de dato sera distinta.
 typedef void (*Destruir) (Persona*);
+typedef void (*Mostrar) (Persona*);
 
 // Prototipos de funciones de manejo de la lista.
 
 // dlist_crear devuleve la lista vacia.
 DList dlist_crear();
 // dlist_crear crea la estructura nodo, con los datos pasados en argumentos.
-DNodo* dnodo_crear(Persona* , DNodo*, DNodo*);
+DNodo* dnodo_crear(void* , DNodo*, DNodo*);
 // dnodo_crear agrega un nodo a la lista, con los datos determinados (persona).
-void dnodo_agregar(DList*, Persona*);
+void dnodo_agregar(DList*, void*);
 // dnodo_agregar imprime los datos guardados en la lista.
-void dlist_mostrar(DList);
+void m(Persona*);
+void dlist_mostrar(DList, Mostrar);
 // dlist_mostrar encargada de liberar la memoria reservada para la
 // estructura Persona.
 void persona_destruir(Persona *);
