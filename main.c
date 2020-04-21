@@ -7,15 +7,15 @@
 int main()
 {
 
-  DList hola = lecturaYcreacionL("salida.txt");
-  insertionSortDList(hola,comparacion_nombre);
-  mostrarDList(hola);
+  DList hola = dlist_leer_crear("salida.txt");
+  dlist_insertionSort(hola,comparacion_edad);
+  dlist_mostrar(hola);
   printf("\n --------------\n");
-  DList a = lecturaYcreacionL("salida.txt");
-  selectionSortDList(a,comparacion_nombre);
-  mostrarDList(a);
-  destruirDList(hola, d);
-  destruirDList(a, d);
+  DList a = dlist_leer_crear("salida.txt");
+  dlist_selectionSort(a,comparacion_nombre);
+  dlist_mostrar(a);
+  dlist_destruir(hola, persona_destruir);
+  dlist_destruir(a, persona_destruir);
   return 0;
 }
 

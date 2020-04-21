@@ -1,8 +1,14 @@
- #ifndef SORT_H_INCLUDED
- #define SORT_H_INCLUDED
+#ifndef SORT_H_INCLUDED
+#define SORT_H_INCLUDED
+
 #include "comparacion.h"
 
-DList selectionSortDList(DList, Compara);
-DList insertionSortDList(DList, Compara);
+// dlist_selectionSort: implementacion del algoritmo selection sort
+// en listas doblemente enlazadas.
+void dlist_selectionSort(DList, Compara);
 
- #endif
+// dlist_selectionSort: implementacion del algoritmo insertion sort
+// en listas doblemente enlazadas.
+void dlist_insertionSort(DList, Compara);
+
+#endif
