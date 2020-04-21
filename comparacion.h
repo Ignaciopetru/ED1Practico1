@@ -3,9 +3,14 @@
 #define COMPARACION_H_INCLUDED
 #include "list.h"
 
-typedef int (* Compara ) ( void * dato1 , void * dato2 ) ;
+// Tipo de la funcion que toman los métodos de sort para ordenar
+typedef int (* Compara ) ( Persona *  , Persona * dato2 ) ;
 
+// comparacion_edad: Persona*, Persona* -> int
+// Método de comparación para ordenar las personas según su edad
 int comparacion_edad(Persona*, Persona*);
 
+// comparacion_edad: Persona*, Persona* -> int
+// Método de comparación para ordenar las personas según su nombre
 int comparacion_nombre(Persona*, Persona*);
 #endif // COMPARACION_H_INCLUDED
