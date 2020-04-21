@@ -4,7 +4,7 @@
 #include "list.h"
 
 // Tipo de la funcion que toman los métodos de sort para ordenar
-typedef int (* Compara ) ( Persona *  , Persona * dato2 ) ;
+typedef int (*Compara) (Persona*, Persona*);
 
 // comparacion_edad: Persona*, Persona* -> int
 // Método de comparación para ordenar las personas según su edad
