@@ -53,11 +53,24 @@ void escrituraSalida(arrayDatos *arrayNacimiento, arrayDatos *arrayPersonas, con
   fclose(fp);
 }
 
+void freeArrays(arrayDatos *array)
+{
+  int i;
+  for (i = 0; i < array->largo; i++)
+  {
+    free(array->array[i]);
+  }
+  free(array->largo);
+  free(array);
+}
+
 int main(int argc, char *argv[])
 {
   arrayDatos *arrayNacimiento = parser("datos/paises.txt");
   arrayDatos *arrayPersonas = parser("datos/nombres1.txt");
   long cant = strtol(argv[1], NULL, 10);
   escrituraSalida(arrayNacimiento, arrayPersonas, "salida.txt", cant);
+  freeArrays(arrayNacimiento);
+  freeArrays(arrayPersonas);
   return 0;
 }
