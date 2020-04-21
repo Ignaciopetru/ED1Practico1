@@ -11,7 +11,7 @@ typedef struct
   long largo;
 } arrayDatos;
 
-arrayDatos *parser(const char *filename);
+arrayDatos *parser(const char *);
 
-void escrituraSalida(arrayDatos *arrayNacimiento, arrayDatos *arrayPersonas, const char *filename, long cant);
+void escrituraSalida(arrayDatos *, arrayDatos *, const char *, long );
 

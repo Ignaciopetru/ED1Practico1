@@ -3,6 +3,13 @@
 #include <string.h>
 #include "comparacion.h"
 
+int c (int* a, int* b){
+  if(*a < *b)
+    return 1;
+  else
+    return 0;
+}
+/*
 int comparacion_edad(Persona *persona1, Persona *persona2)
 {
   if (persona1->edad <= persona2->edad)
@@ -26,3 +33,4 @@ int comparacion_nombre(Persona *persona1, Persona *persona2)
     return 1;
   }
 }
+*/

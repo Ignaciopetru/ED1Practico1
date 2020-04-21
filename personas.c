@@ -7,14 +7,6 @@
 //#include <locale.h>
 #include "personas.h"
 
-/*typedef struct
-{
-  // Array que contiene informacion, ya sea personas o lugar de nacimiento.
-  char **array;
-  // Largo de la array anterior.
-  long largo;
-} arrayDatos;
-*/
 arrayDatos *parser(const char *filename)
 {
   int total_size = 200;

@@ -35,9 +35,21 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="DList.h" />
+		<Unit filename="comparacion.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="comparacion.h" />
+		<Unit filename="lectura.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lectura.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sort.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />
