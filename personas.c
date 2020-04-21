@@ -55,8 +55,8 @@ void escrituraSalida(arrayDatos *arrayNacimiento, arrayDatos *arrayPersonas, con
 
 int main(int argc, char *argv[])
 {
-  arrayDatos *arrayNacimiento = parser("paises.txt");
-  arrayDatos *arrayPersonas = parser("nombres1.txt");
+  arrayDatos *arrayNacimiento = parser("datos/paises.txt");
+  arrayDatos *arrayPersonas = parser("datos/nombres1.txt");
   long cant = strtol(argv[1], NULL, 10);
   escrituraSalida(arrayNacimiento, arrayPersonas, "salida.txt", cant);
   return 0;
