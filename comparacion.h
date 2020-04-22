@@ -2,6 +2,7 @@
 #ifndef COMPARACION_H_INCLUDED
 #define COMPARACION_H_INCLUDED
 #include "list.h"
+#include "datopersona.h"
 
 // Tipo de la funcion que toman los métodos de sort para ordenar
 typedef int (*Compara) (Persona*, Persona*);
