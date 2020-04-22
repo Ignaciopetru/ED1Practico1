@@ -69,6 +69,38 @@ void dlist_intercambiar(DNodo* a, DNodo* b) {
   a->dato = c;
 }
 
+DNodo* dlist_split(DNodo* primero) { 
+    DNodo* fast = primero;
+    DNodo* slow = primero; 
+    while (fast->sig && fast->sig->sig) 
+    { 
+        fast = fast->sig->sig; 
+        slow = slow->sig; 
+    } 
+    DNodo* temp = slow->sig; 
+    slow->next = NULL; 
+    return temp; 
+} 
+
+DNodo* dlist_merge(DNodo* primera, DNodo* segunda) {
+  if (!primera) {
+    return segunda;
+  }
+  if (!segunda) {
+    return primera;
+  }
+  if (c(primera->dato, segunda->dato) == 0) {
+    primera->sig = dlist_merge(primera->sig, segunda);
+    primera->sig->ant = primera;
+    primera->ant = NULL;
+    return primera;
+  } else {
+    segunda->sig = dlist_merge(primera, segunda->sig);
+    segunda->sig->ant = segunda;
+    segunda->ant = NULL;
+    return segunda;
+  }
+}
 DList dlist_leer_crear(const char* filename) {
   DList lista = dlist_crear();
 

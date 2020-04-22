@@ -43,6 +43,11 @@ void persona_destruir(Persona *);
 void dlist_destruir (DList, Destruir);
 // dlist_intercambiar intercambia el dato de dos nodos de la estructura.
 void dlist_intercambiar(DNodo*, DNodo*);
+// dlist_split separa la lista doblemente enlazada en dos, devolviendo un
+// puntero DNodo, el cual es el comienzo de la segunda.
+DNodo* dlist_split(DNodo*);
+// dlist_merge une dos listas doblemente enlazadas
+DNodo* dlist_merge(DNodo*, DNodo*);
 // dlist_leer_crear lee el archivo con las personas y devulve una lista con
 // la informacion de las
 DList dlist_leer_crear (const char *);
