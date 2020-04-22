@@ -6,15 +6,15 @@
 
 int comparacion_edad(Persona* persona1, Persona* persona2) {
   if (persona1->edad <= persona2->edad)
-    return 0;
+    return 0; // Si es 0, no se cambia de lugar
   else
     return 1;
 }
 
 int comparacion_nombre(Persona* persona1, Persona* persona2) {
   if (strcmp(persona1->nombre, persona2->nombre) <= 0)
-    return 1;
+    return 0; // Si es 0, no se cambia de lugar
   else
-    return 0;
+    return 1;
 }
 
