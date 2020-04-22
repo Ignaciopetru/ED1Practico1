@@ -26,15 +26,15 @@ void contar_largo(Persona* persona, int * largo) {
 DList dlist_leer_crear(const char* filename) {
   DList lista = dlist_crear();
 
-  char* edad = malloc(sizeof(char)*3);
+  char* edad = malloc(sizeof(char)*4);
 
   FILE* fp;
   fp = fopen(filename, "r");
   for (;!feof(fp);) {
-  char* nombre = malloc(sizeof(char)*200);
-  char* lugar = malloc(sizeof(char)*200);
+  char* nombre = malloc(sizeof(char)*255);
+  char* lugar = malloc(sizeof(char)*255);
   // Se lee la linea y almacena segun corresponde
-  fscanf(fp, "%200[^,], %3[^,], %200[^\n]\n", nombre, edad, lugar);
+  fscanf(fp, "%255[^,], %4[^,], %255[^\n]\n", nombre, edad, lugar);
   // Se transforma la edad de char a int para poder ser trabajada
   long edadE = strtol(edad, NULL, 10);
   // Se agrega el nodo a la lista
