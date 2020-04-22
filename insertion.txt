@@ -4,4 +4,4 @@ ODILIA RODRIGUEZ, 60, Brunei Darussalam
 BLANCA SEQUEIRA, 36, Bermudas
 RUTH LIDIETTE MORA, 31, Mascate
 
-El algoritmo tardo 0.001442 s en ordenar una lista de 5 elementos
+El algoritmo tardo 0.000001 s en ordenar una lista de 5 elementos
