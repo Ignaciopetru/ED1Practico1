@@ -39,6 +39,18 @@ void dlist_insertionSort(DList lista, Compara c) {
   }
 }
 
-// Falta mergeSortDlist
+void dlist_mergeSort(DList lista, Compara c) {
+  DNodo* primera = lista.primero;
+  if (primera && primera->sig) {
+    DNodo* segunda = dlist_split(lista.primero);
+    dlist_mergeSort(primera); // Tengo que ver como hacer para hacer
+    dlist_mergeSort(segunda); // funcionar esto con nodos
+    lista.primero = dlist_merge(primera, segunda)
+  }
+  
+}
+// Cambios:
+  // Creo dlist_split y dlist_merge, hay que ver si
+  // hay que hacerlas void o dejarlas como estan 
 
 
