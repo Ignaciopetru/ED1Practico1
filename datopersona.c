@@ -48,3 +48,7 @@ DList dlist_leer_crear(const char* filename) {
 void persona_imprimir(Persona * persona, FILE * fp){
   fprintf(fp, "%s, %ld, %s\n",persona->nombre, persona->edad, persona->lugar);
 }
+
+void persona_mostrar(Persona * persona, void* aux){
+  printf("%s, %ld, %s\n",persona->nombre, persona->edad, persona->lugar);
+}

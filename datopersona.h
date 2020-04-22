@@ -21,5 +21,5 @@ void contar_largo(Persona*, int *);
 DList dlist_leer_crear (const char *);
 // persona_crear devulve una estructura Persona con los datos indicados.
 Persona* persona_crear(char*, int, char*);
-
+void persona_mostrar(Persona * , void* );
 #endif

@@ -10,7 +10,7 @@ void dlist_selectionSort(DList lista, Compara c) {
   for (;nodo != NULL; nodo = nodo->sig) {
     DNodo* nodo2 = lista.primero;
     for (;nodo2 != NULL; nodo2 = nodo2->sig) {
-      if (c(nodo->dato, nodo2->dato) == 1) {
+      if (c(nodo->dato, nodo2->dato) == 0) {
         dlist_intercambiar(nodo, nodo2);
       }
     }
@@ -26,7 +26,7 @@ void dlist_insertionSort(DList lista, Compara c) {
 
   for (nodo = lista.primero->sig; nodo != NULL; nodo = nodo->sig) {
     datoG = nodo->dato;
-    for (nodo2 = nodo->ant; nodo2 != NULL && (c(nodo2->dato, datoG) == 0); nodo2 = nodo2->ant) {
+    for (nodo2 = nodo->ant; nodo2 != NULL && (c(nodo2->dato, datoG) == 1); nodo2 = nodo2->ant) {
       nodo2->sig->dato = nodo2->dato;
       aux = nodo2;
       entro = 1;
@@ -39,23 +39,51 @@ void dlist_insertionSort(DList lista, Compara c) {
   }
 }
 
-/*
-void dlist_mergeSort(DList lista, Compara c) {
-  DNodo* primera = lista.primero;
-  if (primera && primera->sig) {
-    DNodo* segunda = dlist_split(lista.primero);
-    DList nueva;
-    nueva.primero = primera;
-    DList nuevaSegunda;
-    nuevaSegunda.primero = segunda;
-    dlist_mergeSort(nueva, c); // Tengo que ver como hacer para hacer
-    dlist_mergeSort(nuevaSegunda, c); // funcionar esto con nodos
-    lista.primero = dlist_merge(primera, segunda);
+DNodo* dlist_mergeSortAux(DNodo* primero, DNodo* segundo, Compara c) {
+  if (!primero) {
+    return segundo;
   }
+  if (!segundo) {
+    return primero;
+  }
+  if (c(primero->dato, segundo->dato) == 0) {
+    primero->sig = dlist_mergeSortAux(primero->sig, segundo, c);
+    //primero->sig->ant = primero; //???????
+    primero->ant = NULL;
+    return primero;
+  } else {
+    segundo->sig = dlist_mergeSortAux(primero, segundo->sig, c);
+    //segundo->sig->ant = segundo; //???????x2
+    segundo->ant = NULL;
+    return segundo;
+  }
+}
+ // Merge puto
+ // Ver por que mergeSortAux no devuelve en orden o algo por el estilo
+void dlist_mergeSortCall(DNodo* primero, Compara c){
+  if (primero && primero->sig) {
+    //printf("Primero en esta iteracion: ");
+    //DList hola;
+    //hola.primero = primero;
+    //dlist_recorrer(hola, persona_mostrar, NULL);
+    DNodo* segundo = dlist_split(primero);
+    //printf("Segundo en esta iteracion: ");
+    //DList hola2;
+    //hola2.primero = segundo;
+    //dlist_recorrer(hola2, persona_mostrar, NULL);
+    //printf("Fin de esta iteracion \n");
+    dlist_mergeSortCall(primero, c);
+    //printf("Aca comienza la recursion sobre la segunda");
+    dlist_mergeSortCall(segundo, c);
+    primero = dlist_mergeSortAux(primero, segundo, c);
+    DList hola;
+    hola.primero = primero;
+    printf("Comienza del print de la lista actual\n");
+    dlist_recorrer(hola, persona_mostrar, NULL);
+    printf("Fin del print de la lista actual\n");
+  }
+}
 
-}*/
-// Cambios:
-  // Creo dlist_split y dlist_merge, hay que ver si
-  // hay que hacerlas void o dejarlas como estan
-
-
+void dlist_mergeSort(DList lista, Compara c) {
+  dlist_mergeSortCall(lista.primero, c);
+}
