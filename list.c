@@ -32,26 +32,27 @@ void dnodo_agregar_inicio(DList* lista, void* dato) {
   }
 }
 
-
+// Agregado aux, para dar mas posibilidades a la funcion visitante
+// (ejemplo: contar cantidad, imprimir en un archivo).
 void dlist_recorrer(DList lista, Visitante visitante, void * aux) {
   DNodo* Nsig = lista.primero;
-  for(;Nsig != NULL; Nsig = Nsig->sig) {
+  for (;Nsig != NULL; Nsig = Nsig->sig) {
     visitante(Nsig->dato, aux);
   }
 }
 
-
-void dlist_destruir (DList lista, Visitante d) {
+void dlist_destruir (DList lista, Visitante liberar) {
   DNodo* proximo = lista.primero;
   DNodo* actual;
   for (; proximo != NULL ; ) {
     actual = proximo;
     proximo = proximo->sig;
-    d(actual->dato, NULL);
+    liberar(actual->dato, NULL);
     free(actual);
   }
 }
 
+// Ver si esta es la forma correcta!
 void dlist_intercambiar(DNodo* a, DNodo* b) {
   void* c = b->dato;
   b->dato = a->dato;

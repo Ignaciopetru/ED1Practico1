@@ -6,7 +6,7 @@
 #include "comparacion.h"
 #include "datopersona.h"
 
-typedef DList (*Sort) (DList, Compara);
+typedef void (*Sort) (DList, Compara);
 
 void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalida, Sort funcionSort, Compara funcionCompara) {
   clock_t start_t, end_t, total_t;
