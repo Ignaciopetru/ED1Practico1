@@ -6,9 +6,9 @@
 
 
 void dlist_selectionSort(DList lista, Compara c) {
-  DNodo* nodo = lista.primero;
+  DNodo* nodo = lista;
   for (;nodo != NULL; nodo = nodo->sig) {
-    DNodo* nodo2 = lista.primero;
+    DNodo* nodo2 = lista;
     for (;nodo2 != NULL; nodo2 = nodo2->sig) {
       if (c(nodo->dato, nodo2->dato) == 0) {
         dlist_intercambiar(nodo, nodo2);
@@ -24,7 +24,7 @@ void dlist_insertionSort(DList lista, Compara c) {
   Persona* datoG;
   int entro = 0;
 
-  for (nodo = lista.primero->sig; nodo != NULL; nodo = nodo->sig) {
+  for (nodo = lista->sig; nodo != NULL; nodo = nodo->sig) {
     datoG = nodo->dato;
     for (nodo2 = nodo->ant; nodo2 != NULL && (c(nodo2->dato, datoG) == 1); nodo2 = nodo2->ant) {
       nodo2->sig->dato = nodo2->dato;
@@ -77,7 +77,7 @@ void dlist_mergeSortCall(DNodo* primero, Compara c){
     dlist_mergeSortCall(segundo, c);
     primero = dlist_mergeSortAux(primero, segundo, c);
     DList hola;
-    hola.primero = primero;
+    //hola.primero = primero;
     printf("Comienza del print de la lista actual\n");
     dlist_recorrer(hola, persona_mostrar, NULL);
     printf("Fin del print de la lista actual\n");
@@ -85,5 +85,5 @@ void dlist_mergeSortCall(DNodo* primero, Compara c){
 }
 
 void dlist_mergeSort(DList lista, Compara c) {
-  dlist_mergeSortCall(lista.primero, c);
+ // dlist_mergeSortCall(lista.primero, c);
 }

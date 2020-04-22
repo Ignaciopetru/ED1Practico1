@@ -12,8 +12,8 @@
   <line>Command: /home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</line>
 </preamble>
 
-<pid>19704</pid>
-<ppid>19300</ppid>
+<pid>25905</pid>
+<ppid>25213</ppid>
 <tool>memcheck</tool>
 
 <args>
@@ -37,7 +37,7 @@
 
 <status>
   <state>FINISHED</state>
-  <time>00:00:00:00.613 </time>
+  <time>00:00:00:00.609 </time>
 </status>
 
 <errorcounts>

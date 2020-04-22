@@ -4,9 +4,7 @@
 #include "list.h"
 
 DList dlist_crear() {
-  DList nueva;
-  nueva.primero = NULL;
-  return nueva;
+  return NULL;
 }
 
 DNodo* dnodo_crear(void* dato, DNodo*ant, DNodo*sig) {
@@ -19,30 +17,30 @@ DNodo* dnodo_crear(void* dato, DNodo*ant, DNodo*sig) {
   return nuevo;
 }
 
-void dnodo_agregar_inicio(DList* lista, void* dato) {
-  if(lista->primero == NULL) {
+DList dnodo_agregar_inicio(DList lista, void* dato) {
+  if(lista == NULL) {
     // Caso lista vacia.
     DNodo* nuevo = dnodo_crear(dato, NULL, NULL);
-    lista->primero = nuevo;
+    return nuevo;
   } else {
     // Caso lista con elementos.
-    DNodo* nuevo = dnodo_crear(dato, NULL, lista->primero);
-    lista->primero->ant = nuevo;
-    lista->primero = nuevo;
+    DNodo* nuevo = dnodo_crear(dato, NULL, lista);
+    (lista)->ant = nuevo;
+    return nuevo;
   }
 }
 
 // Agregado aux, para dar mas posibilidades a la funcion visitante
 // (ejemplo: contar cantidad, imprimir en un archivo).
 void dlist_recorrer(DList lista, Visitante visitante, void * aux) {
-  DNodo* Nsig = lista.primero;
+  DNodo* Nsig = lista;
   for (;Nsig != NULL; Nsig = Nsig->sig) {
     visitante(Nsig->dato, aux);
   }
 }
 
 void dlist_destruir (DList lista, Visitante liberar) {
-  DNodo* proximo = lista.primero;
+  DNodo* proximo = lista;
   DNodo* actual;
   for (; proximo != NULL ; ) {
     actual = proximo;

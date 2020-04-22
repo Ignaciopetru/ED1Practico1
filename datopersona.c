@@ -39,7 +39,7 @@ DList dlist_leer_crear(const char* filename) {
   long edadE = strtol(edad, NULL, 10);
   // Se agrega el nodo a la lista
 
-  dnodo_agregar_inicio(&lista, persona_crear(nombre, edadE, lugar));
+  lista = dnodo_agregar_inicio(lista, persona_crear(nombre, edadE, lugar));
   }
   free(edad);
   return lista;
