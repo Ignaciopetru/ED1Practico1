@@ -24,15 +24,15 @@ void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalid
   // Abrimos archivo.
   FILE* fp = fopen(filenameSalida, "w");
   // Impirmimos el contenido de la lista.
-  dlist_recorrer(lista, persona_imprimir, fp);
+  dlist_recorrer(lista, (Visitante)persona_imprimir , fp);
   // Se cuenta el largo de la lista (tal vez innecesario).
   int * largoL = malloc(sizeof(int));
   *largoL = 0;
-  dlist_recorrer(lista, contar_largo, largoL);
+  dlist_recorrer(lista, (Visitante)contar_largo, largoL);
   fprintf(fp,"\nEl algoritmo tardo %f s en ordenar una lista de %d elementos", total, *largoL);
   fclose(fp);
   // Se libera memoria.
-  dlist_destruir(lista, persona_destruir);
+  dlist_destruir(lista,(Visitante) persona_destruir);
   free(largoL);
 }
 

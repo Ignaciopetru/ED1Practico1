@@ -499,4 +499,4 @@ DOMINGA SAENZ, 100, Skopie
 MARIA VIRGINIA HIDALGO, 100, Bélgica
 DONALD WILLIAM MONROE, 100, Isla Ascension
 
-El algoritmo tardo 0.000287 s en ordenar una lista de 500 elementos
+El algoritmo tardo 0.018702 s en ordenar una lista de 500 elementos

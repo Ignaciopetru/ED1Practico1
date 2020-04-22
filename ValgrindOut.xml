@@ -12,7 +12,7 @@
   <line>Command: /home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</line>
 </preamble>
 
-<pid>25905</pid>
+<pid>26083</pid>
 <ppid>25213</ppid>
 <tool>memcheck</tool>
 
@@ -34,13 +34,175 @@
   <time>00:00:00:00.074 </time>
 </status>
 
+<error>
+  <unique>0x0</unique>
+  <tid>1</tid>
+  <kind>InvalidWrite</kind>
+  <what>Invalid write of size 1</what>
+  <stack>
+    <frame>
+      <ip>0x4EAB563</ip>
+      <obj>/lib/x86_64-linux-gnu/libc-2.27.so</obj>
+      <fn>_IO_vfscanf</fn>
+      <dir>/build/glibc-OTsEL5/glibc-2.27/stdio-common</dir>
+      <file>vfscanf.c</file>
+      <line>2978</line>
+    </frame>
+    <frame>
+      <ip>0x4EB82E5</ip>
+      <obj>/lib/x86_64-linux-gnu/libc-2.27.so</obj>
+      <fn>__isoc99_fscanf</fn>
+      <dir>/build/glibc-OTsEL5/glibc-2.27/stdio-common</dir>
+      <file>isoc99_fscanf.c</file>
+      <line>34</line>
+    </frame>
+    <frame>
+      <ip>0x108B12</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>dlist_leer_crear</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>datopersona.c</file>
+      <line>37</line>
+    </frame>
+    <frame>
+      <ip>0x108E28</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>crear_archivo_salida</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>main.c</file>
+      <line>15</line>
+    </frame>
+    <frame>
+      <ip>0x108F5A</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>main</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>main.c</file>
+      <line>41</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x522d043 is 0 bytes after a block of size 3 alloc'd</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C2FB0F</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>malloc</fn>
+    </frame>
+    <frame>
+      <ip>0x108AAF</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>dlist_leer_crear</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>datopersona.c</file>
+      <line>29</line>
+    </frame>
+    <frame>
+      <ip>0x108E28</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>crear_archivo_salida</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>main.c</file>
+      <line>15</line>
+    </frame>
+    <frame>
+      <ip>0x108F5A</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>main</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>main.c</file>
+      <line>41</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x1</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 1</what>
+  <stack>
+    <frame>
+      <ip>0x4E8129B</ip>
+      <obj>/lib/x86_64-linux-gnu/libc-2.27.so</obj>
+      <fn>____strtol_l_internal</fn>
+      <dir>/build/glibc-OTsEL5/glibc-2.27/stdlib/../stdlib</dir>
+      <file>strtol_l.c</file>
+      <line>432</line>
+    </frame>
+    <frame>
+      <ip>0x108B28</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>dlist_leer_crear</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>datopersona.c</file>
+      <line>39</line>
+    </frame>
+    <frame>
+      <ip>0x108E28</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>crear_archivo_salida</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>main.c</file>
+      <line>15</line>
+    </frame>
+    <frame>
+      <ip>0x108F5A</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>main</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>main.c</file>
+      <line>41</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x522d043 is 0 bytes after a block of size 3 alloc'd</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4C2FB0F</ip>
+      <obj>/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so</obj>
+      <fn>malloc</fn>
+    </frame>
+    <frame>
+      <ip>0x108AAF</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>dlist_leer_crear</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>datopersona.c</file>
+      <line>29</line>
+    </frame>
+    <frame>
+      <ip>0x108E28</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>crear_archivo_salida</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>main.c</file>
+      <line>15</line>
+    </frame>
+    <frame>
+      <ip>0x108F5A</ip>
+      <obj>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1/bin/Debug/ED1Practico1</obj>
+      <fn>main</fn>
+      <dir>/home/petru/Proyectos/ED1Trabajo1/ED1Practico1</dir>
+      <file>main.c</file>
+      <line>41</line>
+    </frame>
+  </stack>
+</error>
+
 
 <status>
   <state>FINISHED</state>
-  <time>00:00:00:00.609 </time>
+  <time>00:00:00:00.650 </time>
 </status>
 
 <errorcounts>
+  <pair>
+    <count>8</count>
+    <unique>0x1</unique>
+  </pair>
+  <pair>
+    <count>8</count>
+    <unique>0x0</unique>
+  </pair>
 </errorcounts>
 
 <suppcounts>
