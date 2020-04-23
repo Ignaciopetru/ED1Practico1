@@ -1,5 +1,0 @@
-ANA LIA BARBOZA, 22, Podgorica
-OLGA LORENA MURILLO, 46, Armenia
-NOVELI QUIROS, 80, Croacia
-
-El algoritmo tardo 0.000001 s en ordenar una lista de 3 elementos
