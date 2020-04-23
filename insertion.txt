@@ -4,4 +4,4 @@ JUAN ANTONIO ROBLES, 15, Tonga
 NOVELI QUIROS, 80, Croacia
 OLGA LORENA MURILLO, 46, Armenia
 
-El algoritmo tardo 0.000003 s en ordenar una lista de 5 elementos
+El algoritmo tardo 0.000001 s en ordenar una lista de 5 elementos

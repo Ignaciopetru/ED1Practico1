@@ -40,6 +40,9 @@ void dlist_intercambiar(DNodo*, DNodo*);
 // puntero DNodo, el cual es el comienzo de la segunda.
 DList dlist_split(DList);
 
+// Une dos listas cuyo primer elemento cumple una condicion.
+DList dlist_merge(DList, DList, Comparacion);
+
 // Funciones de ordenamiento:
 
 // dlist_selectionSort: implementacion del algoritmo selection sort

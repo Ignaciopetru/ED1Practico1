@@ -34,10 +34,40 @@ void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalid
   free(largoL);
 }
 
+
+void a(int * h, void * a){
+  printf("%d", *h);
+}
+int c(int*a, int*b){
+  return *a<*b;
+}
+
 int main()
 {
-  crear_archivo_salida("salida.txt", "insertion.txt", dlist_selectionSort, (Comparacion) comparacion_nombre);
+  DList hola = dlist_crear();
 
+  DList hola2 = dlist_crear();
+  //crear_archivo_salida("salida.txt", "insertion.txt", dlist_selectionSort, (Comparacion) comparacion_nombre);
+
+  int * h = malloc(sizeof(int));
+  int * g = malloc(sizeof(int));
+  int * f = malloc(sizeof(int));
+  int * j = malloc(sizeof(int));
+  *h = 0;
+  *g = 1;
+  *f = 5;
+  *j = 3;
+  hola = dnodo_agregar_inicio(hola, j);
+  hola2 = dnodo_agregar_inicio(hola2, f);
+  hola = dnodo_agregar_inicio(hola, h);
+  hola2 = dnodo_agregar_inicio(hola2, g);
+  dlist_recorrer(hola, a, NULL);
+  printf("\n");
+  dlist_recorrer(hola2, a, NULL);
+  printf("\n");
+  hola = dlist_merge(NULL, hola, c);
+  dlist_recorrer(hola, a, NULL);
+  dlist_mergeSort(hola, c);
   return 0;
 }
 

@@ -5,9 +5,8 @@
 #include "datopersona.h"
 
 struct _Persona {
-  char* nombre;
+  char* nombre, * lugar;
   long edad;
-  char* lugar;
 };
 
 Persona* persona_crear(char* nombre, int edadE, char* lugar) {

@@ -4,8 +4,7 @@
 
 struct _DNodo {
   void* dato;
-  struct _DNodo* sig;
-  struct _DNodo* ant;
+  struct _DNodo* sig, * ant;
 };
 
 DList dlist_crear() {
@@ -107,6 +106,64 @@ void dlist_insertionSort(DList lista, Comparacion c) {
   }
 }
 
+
+DList dlist_merge(DList lista1, DList lista2, Comparacion c){
+  if (!lista1) {
+    return lista2;
+  }
+  if (!lista2) {
+    return lista1;
+  }
+  DList aux, aux2, aux3, aux4;
+  aux = lista1;
+  aux2 = lista2;
+  while(aux->sig != NULL && aux2 != NULL){
+    if(c(aux->dato, aux2->dato)){
+      aux = aux->sig;
+    } else {
+      aux3 = aux2->sig;
+      aux->ant->sig = aux2;
+      aux2->ant = aux->ant;
+      aux2->sig = aux;
+      aux->ant = aux2;
+
+      aux2 = aux3;
+
+    }
+  }
+  if(aux2 == NULL){
+    return lista1;
+  } else {
+    // Para no tener que buscar otra vez el final de lista1
+
+    if(c(aux->dato, aux2->dato)){
+      aux = aux->sig;
+    } else {
+      aux3 = aux2->sig;
+      aux->ant->sig = aux2;
+      aux2->ant = aux->ant;
+      aux2->sig = aux;
+      aux->ant = aux2;
+
+      aux2 = aux3;
+
+    }
+    aux->sig = aux2;
+    return lista1;
+  }
+
+
+}
+
+
+void dlist_mergeSort(DList lista, Comparacion c){
+  if(lista == NULL)
+    return;
+
+
+}
+
+/*
 DNodo* dlist_mergeSortAux(DNodo* primero, DNodo* segundo, Comparacion c) {
   if (!primero) {
     return segundo;
@@ -155,5 +212,5 @@ void dlist_mergeSortCall(DNodo* primero, Comparacion c){
 
 void dlist_mergeSort(DList lista, Comparacion c) {
  // dlist_mergeSortCall(lista.primero, c);
-}
+}*/
 
