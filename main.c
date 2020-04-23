@@ -2,13 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include "list.h"
-#include "sort.h"
-#include "comparacion.h"
 #include "datopersona.h"
 
-typedef void (*Sort) (DList, Compara);
+typedef void (*Sort) (DList, Comparacion);
 // Achicar linea ->
-void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalida, Sort funcionSort, Compara funcionCompara) {
+void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalida, Sort funcionSort, Comparacion funcionCompara) {
   // Variables usadas para calcular el timpo de ejecucion.
   clock_t start_t, end_t;
   // Creacion de la lista.
@@ -32,13 +30,14 @@ void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalid
   fprintf(fp,"\nEl algoritmo tardo %f s en ordenar una lista de %d elementos", total, *largoL);
   fclose(fp);
   // Se libera memoria.
-  dlist_destruir(lista,(Visitante) persona_destruir);
+  dlist_destruir(lista, (Visitante) persona_destruir);
   free(largoL);
 }
 
 int main()
 {
-  crear_archivo_salida("salida.txt", "insertion.txt", dlist_insertionSort, comparacion_edad);
+  crear_archivo_salida("salida.txt", "insertion.txt", dlist_selectionSort, (Comparacion) comparacion_nombre);
+
   return 0;
 }
 

@@ -2,11 +2,7 @@
 #define DATOPERSONA_H_INLCUDED
 
 // Estructura que continene los datos de la persona.
- typedef struct _Persona {
-  char* nombre;
-  long edad;
-  char* lugar;
-} Persona;
+ typedef struct _Persona Persona;
 
 // persona_destruir libera la memoria pedida especificamente para la
 // estructura Persona.
@@ -22,4 +18,12 @@ DList dlist_leer_crear (const char *);
 // persona_crear devulve una estructura Persona con los datos indicados.
 Persona* persona_crear(char*, int, char*);
 void persona_mostrar(Persona * , void* );
+
+// comparacion_edad: Persona*, Persona* -> int
+// Método de comparación para ordenar las personas según su edad
+int comparacion_edad(Persona*, Persona*);
+
+// comparacion_edad: Persona*, Persona* -> int
+// Método de comparación para ordenar las personas según su nombre
+int comparacion_nombre(Persona*, Persona*);
 #endif

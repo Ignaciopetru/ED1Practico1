@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "list.h"
 #include "datopersona.h"
 
+struct _Persona {
+  char* nombre;
+  long edad;
+  char* lugar;
+};
 
 Persona* persona_crear(char* nombre, int edadE, char* lugar) {
   Persona* nueva = malloc(sizeof(Persona));
@@ -25,9 +30,7 @@ void contar_largo(Persona* persona, int * largo) {
 
 DList dlist_leer_crear(const char* filename) {
   DList lista = dlist_crear();
-
   char* edad = malloc(sizeof(char)*4);
-
   FILE* fp;
   fp = fopen(filename, "r");
   for (;!feof(fp);) {
@@ -45,10 +48,21 @@ DList dlist_leer_crear(const char* filename) {
   return lista;
 }
 
-void persona_imprimir(Persona * persona, FILE * fp){
+// persona_imprimir es del tipo Visitante
+void persona_imprimir(Persona * persona, FILE * fp) {
   fprintf(fp, "%s, %ld, %s\n",persona->nombre, persona->edad, persona->lugar);
 }
 
-void persona_mostrar(Persona * persona, void* aux){
+// persona_mostrar es del tipo Visitante
+void persona_mostrar(Persona * persona, void* aux) {
   printf("%s, %ld, %s\n",persona->nombre, persona->edad, persona->lugar);
 }
+// comparacion_edad es del tipo Comparacion
+int comparacion_edad(Persona* persona1, Persona* persona2) {
+  return (persona1->edad <= persona2->edad);
+}
+// comparacion_nombre es del tipo Comparacion
+int comparacion_nombre(Persona* persona1, Persona* persona2) {
+  return (strcmp(persona1->nombre, persona2->nombre) <= 0);
+}
+
