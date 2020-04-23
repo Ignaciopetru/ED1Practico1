@@ -60,16 +60,17 @@ void dlist_intercambiar(DNodo* nodoA, DNodo* nodoB) {
   nodoA->dato = nodoC;
 }
 
-DNodo* dlist_split(DNodo* primero) {
-    DNodo* fast = primero;
-    DNodo* slow = primero;
+DList dlist_split(DList primero) {
+    DList fast = primero;
+    DList slow = primero;
     while (fast->sig && fast->sig->sig)
     {
         fast = fast->sig->sig;
         slow = slow->sig;
     }
-    DNodo* temp = slow->sig;
+    DList temp = slow->sig;
     slow->sig = NULL;
+    temp->ant = NULL;
     return temp;
 }
 
@@ -108,109 +109,115 @@ void dlist_insertionSort(DList lista, Comparacion c) {
 
 
 DList dlist_merge(DList lista1, DList lista2, Comparacion c){
-  if (!lista1) {
+  if (lista1 == NULL) {
     return lista2;
   }
-  if (!lista2) {
+  if (lista2 == NULL) {
     return lista1;
   }
   DList aux, aux2, aux3, aux4;
   aux = lista1;
   aux2 = lista2;
-  while(aux->sig != NULL && aux2 != NULL){
+  while(aux != NULL && aux2 != NULL){
     if(c(aux->dato, aux2->dato)){
+      aux4 = aux;
       aux = aux->sig;
     } else {
       aux3 = aux2->sig;
-      aux->ant->sig = aux2;
+      if(aux->ant != NULL)
+        aux->ant->sig = aux2;
       aux2->ant = aux->ant;
       aux2->sig = aux;
       aux->ant = aux2;
-
       aux2 = aux3;
-
     }
+
   }
-  if(aux2 == NULL){
-    return lista1;
-  } else {
-    // Para no tener que buscar otra vez el final de lista1
-
-    if(c(aux->dato, aux2->dato)){
-      aux = aux->sig;
-    } else {
-      aux3 = aux2->sig;
-      aux->ant->sig = aux2;
-      aux2->ant = aux->ant;
-      aux2->sig = aux;
-      aux->ant = aux2;
-
-      aux2 = aux3;
-
+    if(aux2 == NULL){
+      return lista1;
+    } else{
+    aux4->sig = aux2;
     }
-    aux->sig = aux2;
     return lista1;
-  }
+
 
 
 }
 
 
-void dlist_mergeSort(DList lista, Comparacion c){
-  if(lista == NULL)
-    return;
 
+
+DList dlist_mergeSort(DList *lista, Comparacion c) {
+    if ((*lista) == NULL || (*lista)->sig == NULL)
+      return;
+
+    DList segundo = dlist_split(*lista);
+
+    dlist_mergeSort(lista, c);
+
+    dlist_mergeSort(&segundo, c);
+
+    lista = dlist_merge(lista, &segundo, c);
+
+    return lista;
 
 }
 
-/*
-DNodo* dlist_mergeSortAux(DNodo* primero, DNodo* segundo, Comparacion c) {
-  if (!primero) {
-    return segundo;
+
+void dlist_split(DNodo* primero, DNodo splitInicio , DNodo splitMedio) {
+    DNodo* slow = primero;
+    DNodo* fast = primero->sig;
+
+    while (fast!=NULL) {
+        fast = fast->sig;
+        if (fast!=NULL) {
+          slow = slow->sig;
+          fast = fast->sig;
+        }
+    }
+    splitMedio = slow->sig;
+    slow->sig = NULL;
+    //splitMedio->ant = NULL; ???
+}
+
+
+DNodo* dlist_mergeSortAux(DNodo* splitInicio, DNodo* splitMedio, Compara c) {
+  if (splitInicio == NULL) {
+    return splitMedio;
   }
-  if (!segundo) {
-    return primero;
+  if (splitMedio == NULL) {
+    return splitInicio;
   }
-  if (c(primero->dato, segundo->dato) == 0) {
-    primero->sig = dlist_mergeSortAux(primero->sig, segundo, c);
-    //primero->sig->ant = primero; //???????
-    primero->ant = NULL;
-    return primero;
+  if (c(splitInicio->dato, splitMedio->dato) == 0) {
+    splitInicio->sig = dlist_mergeSortAux(splitInicio->sig, splitMedio, c);
+    splitInicio->sig->ant = splitInicio;
+    splitInicio->ant = NULL;
+
+    return splitInicio;
   } else {
-    segundo->sig = dlist_mergeSortAux(primero, segundo->sig, c);
-    //segundo->sig->ant = segundo; //???????x2
-    segundo->ant = NULL;
-    return segundo;
+    splitMedio->sig = dlist_mergeSortAux(splitInicio, splitMedio->sig, c);
+    splitMedio->sig->ant = splitMedio;
+    splitMedio->ant = NULL;
+
+    return splitMedio;
   }
 }
 
  // Merge puto
  // Ver por que mergeSortAux no devuelve en orden o algo por el estilo
-void dlist_mergeSortCall(DNodo* primero, Comparacion c){
-  if (primero && primero->sig) {
-    //printf("Primero en esta iteracion: ");
-    //DList hola;
-    //hola.primero = primero;
-    //dlist_recorrer(hola, persona_mostrar, NULL);
-    DNodo* segundo = dlist_split(primero);
-    //printf("Segundo en esta iteracion: ");
-    //DList hola2;
-    //hola2.primero = segundo;
-    //dlist_recorrer(hola2, persona_mostrar, NULL);
-    //printf("Fin de esta iteracion \n");
-    dlist_mergeSortCall(primero, c);
-    //printf("Aca comienza la recursion sobre la segunda");
-    dlist_mergeSortCall(segundo, c);
-    primero = dlist_mergeSortAux(primero, segundo, c);
-    DList hola;
-    //hola.primero = primero;
-    printf("Comienza del print de la lista actual\n");
-    //dlist_recorrer(hola, persona_mostrar, NULL);
-    printf("Fin del print de la lista actual\n");
-  }
+void dlist_mergeSortCall(DNodo** primero, Compara c){
+  if (primero==NULL || (primero)->sig == NULL)
+    return;
+
+  DNodo* splitInicio = *primero, splitMedio;
+  dlist_split(primero, &splitInicio, &splitMedio);
+
+  dlist_mergeSortCall(&splitInicio, c);
+  dlist_mergeSortCall(&splitMedio, c);
+
+  *primero = dlist_mergeSortAux(splitInicio, splitMedio, c);
 }
 
-void dlist_mergeSort(DList lista, Comparacion c) {
- // dlist_mergeSortCall(lista.primero, c);
-}*/
-
+void dlist_mergeSort(DList lista, Compara c) {
+  dlist_mergeSortCall(&lista.primero, c);
+}

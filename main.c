@@ -44,11 +44,12 @@ int c(int*a, int*b){
 
 int main()
 {
-  DList hola = dlist_crear();
+
+  //crear_archivo_salida("salida.txt", "insertion.txt", dlist_mergeSort, (Comparacion) comparacion_edad);
+
+DList hola = dlist_crear();
 
   DList hola2 = dlist_crear();
-  //crear_archivo_salida("salida.txt", "insertion.txt", dlist_selectionSort, (Comparacion) comparacion_nombre);
-
   int * h = malloc(sizeof(int));
   int * g = malloc(sizeof(int));
   int * f = malloc(sizeof(int));
@@ -57,17 +58,18 @@ int main()
   *g = 1;
   *f = 5;
   *j = 3;
-  hola = dnodo_agregar_inicio(hola, j);
-  hola2 = dnodo_agregar_inicio(hola2, f);
   hola = dnodo_agregar_inicio(hola, h);
-  hola2 = dnodo_agregar_inicio(hola2, g);
+  hola = dnodo_agregar_inicio(hola, g);
+  hola = dnodo_agregar_inicio(hola, f);
+  hola = dnodo_agregar_inicio(hola, j);
   dlist_recorrer(hola, a, NULL);
   printf("\n");
-  dlist_recorrer(hola2, a, NULL);
+  //dlist_recorrer(hola2, a, NULL);
   printf("\n");
-  hola = dlist_merge(NULL, hola, c);
-  dlist_recorrer(hola, a, NULL);
-  dlist_mergeSort(hola, c);
+
+  //hola = dlist_merge(hola, hola2, c);
+  DList * ac = dlist_mergeSort(&hola, c);
+  dlist_recorrer(*ac, a, NULL);
   return 0;
 }
 

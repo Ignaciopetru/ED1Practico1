@@ -54,7 +54,7 @@ void dlist_selectionSort(DList, Comparacion);
 void dlist_insertionSort(DList, Comparacion);
 
 // dlist_mergeSort: implementacion del algoritmo merge sort en listas
-void dlist_mergeSort(DList, Comparacion);
+DList dlist_mergeSort(DList *, Comparacion);
 
 
 
