@@ -3,8 +3,9 @@
 #include <time.h>
 #include "list.h"
 #include "datopersona.h"
+#include "stack.h"
 
-typedef void (*Sort) (DList, Comparacion);
+typedef DList (*Sort) (DList, Comparacion);
 // Achicar linea ->
 void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalida, Sort funcionSort, Comparacion funcionCompara) {
   // Variables usadas para calcular el timpo de ejecucion.
@@ -14,7 +15,7 @@ void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalid
   // Se establece el momento de inicio de ejecucion del algoritmo.
   start_t = clock();
   // Ejecucion del mismo.
-  funcionSort(lista, funcionCompara);
+  lista = funcionSort(lista, funcionCompara);
   // Se establece el momento de fin de ejecucion del algoritmo.
   end_t = clock();
   // Se calcula el tiempo de ejecucion.
@@ -35,41 +36,69 @@ void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalid
 }
 
 
-void a(int * h, void * a){
-  printf("%d", *h);
-}
+
 int c(int*a, int*b){
-  return *a<*b;
+  return (*a)<(*b);
+}
+
+  void a(int * h, void * a){
+  printf("%d-", *h);
 }
 
 int main()
 {
 
-  //crear_archivo_salida("salida.txt", "insertion.txt", dlist_mergeSort, (Comparacion) comparacion_edad);
+  crear_archivo_salida("salida.txt", "insertion.txt", dlist_mergeSort, (Comparacion) comparacion_edad);
+/*
+  int * h = malloc(sizeof(int));
+  *h = 42;
+  int * g = malloc(sizeof(int));
+  *g = 19;
+  int * f = malloc(sizeof(int));
+  *f = 44;
+   int * j = malloc(sizeof(int));
+  *j = 39;
+  int * k = malloc(sizeof(int));
+  *k = 31;
+  int * q = malloc(sizeof(int));
+  *q = 5;
+  int * r = malloc(sizeof(int));
+  *r = 11;
+  int * t = malloc(sizeof(int));
+  *t = 88;
+  int * z = malloc(sizeof(int));
+  *z = 72;
 
-DList hola = dlist_crear();
+  DList hola = dlist_crear();
 
   DList hola2 = dlist_crear();
-  int * h = malloc(sizeof(int));
-  int * g = malloc(sizeof(int));
-  int * f = malloc(sizeof(int));
-  int * j = malloc(sizeof(int));
-  *h = 0;
-  *g = 1;
-  *f = 5;
-  *j = 3;
-  hola = dnodo_agregar_inicio(hola, h);
-  hola = dnodo_agregar_inicio(hola, g);
-  hola = dnodo_agregar_inicio(hola, f);
-  hola = dnodo_agregar_inicio(hola, j);
-  dlist_recorrer(hola, a, NULL);
-  printf("\n");
-  //dlist_recorrer(hola2, a, NULL);
+
+
+  hola2 = dnodo_agregar_inicio(hola2, h);
+  hola2 = dnodo_agregar_inicio(hola2, g);
+  hola2 = dnodo_agregar_inicio(hola2, f);
+  hola2 = dnodo_agregar_inicio(hola2, j);
+  hola2 = dnodo_agregar_inicio(hola2, k);
+  hola2 = dnodo_agregar_inicio(hola2, r);
+  hola2 = dnodo_agregar_inicio(hola2, t);
+  hola2 = dnodo_agregar_inicio(hola2, q);
+  hola2 = dnodo_agregar_inicio(hola2, q);
+  hola2 = dnodo_agregar_inicio(hola2, z);
+
+
+
+  dlist_recorrer(hola2, a, NULL);
   printf("\n");
 
-  //hola = dlist_merge(hola, hola2, c);
-  DList * ac = dlist_mergeSort(&hola, c);
-  dlist_recorrer(*ac, a, NULL);
+
+  hola2 = dlist_mergeSort(hola2,c);
+  dlist_recorrer(hola2, a, NULL);
+  printf("\n");
+  printf("\n");
+  printf("\n");
+*/
+
+
   return 0;
 }
 

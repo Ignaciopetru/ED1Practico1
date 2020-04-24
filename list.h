@@ -1,6 +1,6 @@
 #ifndef LIST_H_INLCUDED
 #define LIST_H_INLCUDED
-
+#include "stack.h"
 
 // Estructura que representa un nodo en la lista enlazada,
 // cuyo dato es una personta
@@ -54,7 +54,7 @@ void dlist_selectionSort(DList, Comparacion);
 void dlist_insertionSort(DList, Comparacion);
 
 // dlist_mergeSort: implementacion del algoritmo merge sort en listas
-DList dlist_mergeSort(DList *, Comparacion);
+DList dlist_mergeSort(DList, Comparacion);
 
 
 

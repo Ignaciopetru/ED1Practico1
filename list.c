@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
+#include "stack.h"
 
 struct _DNodo {
   void* dato;
@@ -60,19 +61,6 @@ void dlist_intercambiar(DNodo* nodoA, DNodo* nodoB) {
   nodoA->dato = nodoC;
 }
 
-DList dlist_split(DList primero) {
-    DList fast = primero;
-    DList slow = primero;
-    while (fast->sig && fast->sig->sig)
-    {
-        fast = fast->sig->sig;
-        slow = slow->sig;
-    }
-    DList temp = slow->sig;
-    slow->sig = NULL;
-    temp->ant = NULL;
-    return temp;
-}
 
 void dlist_selectionSort(DList lista, Comparacion c) {
   DNodo* nodo = lista;
@@ -108,6 +96,30 @@ void dlist_insertionSort(DList lista, Comparacion c) {
 }
 
 
+DList dlist_split(DList primero) {
+    DList fast = primero;
+    DList slow = primero;
+    while (fast->sig && fast->sig->sig)
+    {
+        fast = fast->sig->sig;
+        slow = slow->sig;
+    }
+    DList temp = slow->sig;
+    slow->sig = NULL;
+    temp->ant = NULL;
+    return temp;
+}
+
+
+
+  void a1(int * h, void * a){
+  printf("%d", *h);
+}
+
+void contar_largo(DList lista, int * largo) {
+  (*largo)++;
+}
+
 DList dlist_merge(DList lista1, DList lista2, Comparacion c){
   if (lista1 == NULL) {
     return lista2;
@@ -115,109 +127,124 @@ DList dlist_merge(DList lista1, DList lista2, Comparacion c){
   if (lista2 == NULL) {
     return lista1;
   }
-  DList aux, aux2, aux3, aux4;
-  aux = lista1;
-  aux2 = lista2;
-  while(aux != NULL && aux2 != NULL){
-    if(c(aux->dato, aux2->dato)){
-      aux4 = aux;
-      aux = aux->sig;
+  DList punteroAlInicio = lista1, lista2Aux, lista1Aux;
+  lista1Aux = lista1;
+  while (lista1 != NULL && lista2 != NULL) {
+    if (c(lista1->dato, lista2->dato)) {
+      lista1 = lista1->sig;
     } else {
-      aux3 = aux2->sig;
-      if(aux->ant != NULL)
-        aux->ant->sig = aux2;
-      aux2->ant = aux->ant;
-      aux2->sig = aux;
-      aux->ant = aux2;
-      aux2 = aux3;
+      lista2Aux = lista2->sig;
+      if (lista1->ant == NULL)
+        punteroAlInicio = lista2;
+      lista2->ant = lista1->ant;
+      lista2->sig = lista1;
+      if (lista1->ant != NULL)
+        lista1->ant->sig = lista2;
+      lista1->ant = lista2;
+      lista2 = lista2Aux;
     }
-
   }
-    if(aux2 == NULL){
-      return lista1;
-    } else{
-    aux4->sig = aux2;
-    }
-    return lista1;
 
-
-
-}
-
-
-
-
-DList dlist_mergeSort(DList *lista, Comparacion c) {
-    if ((*lista) == NULL || (*lista)->sig == NULL)
-      return;
-
-    DList segundo = dlist_split(*lista);
-
-    dlist_mergeSort(lista, c);
-
-    dlist_mergeSort(&segundo, c);
-
-    lista = dlist_merge(lista, &segundo, c);
-
-    return lista;
-
-}
-
-
-void dlist_split(DNodo* primero, DNodo splitInicio , DNodo splitMedio) {
-    DNodo* slow = primero;
-    DNodo* fast = primero->sig;
-
-    while (fast!=NULL) {
-        fast = fast->sig;
-        if (fast!=NULL) {
-          slow = slow->sig;
-          fast = fast->sig;
-        }
-    }
-    splitMedio = slow->sig;
-    slow->sig = NULL;
-    //splitMedio->ant = NULL; ???
-}
-
-
-DNodo* dlist_mergeSortAux(DNodo* splitInicio, DNodo* splitMedio, Compara c) {
-  if (splitInicio == NULL) {
-    return splitMedio;
-  }
-  if (splitMedio == NULL) {
-    return splitInicio;
-  }
-  if (c(splitInicio->dato, splitMedio->dato) == 0) {
-    splitInicio->sig = dlist_mergeSortAux(splitInicio->sig, splitMedio, c);
-    splitInicio->sig->ant = splitInicio;
-    splitInicio->ant = NULL;
-
-    return splitInicio;
+  if (lista2 != NULL) {
+    // Se debe arreglarrrr para que no recorra otra vez la lista1
+    for (;lista1Aux->sig != NULL; lista1Aux = lista1Aux->sig);
+    lista1Aux->sig = lista2;
+    lista2->ant = lista1Aux;
+    return punteroAlInicio;
   } else {
-    splitMedio->sig = dlist_mergeSortAux(splitInicio, splitMedio->sig, c);
-    splitMedio->sig->ant = splitMedio;
-    splitMedio->ant = NULL;
-
-    return splitMedio;
+    return punteroAlInicio;
   }
+
 }
 
- // Merge puto
- // Ver por que mergeSortAux no devuelve en orden o algo por el estilo
-void dlist_mergeSortCall(DNodo** primero, Compara c){
-  if (primero==NULL || (primero)->sig == NULL)
-    return;
 
-  DNodo* splitInicio = *primero, splitMedio;
-  dlist_split(primero, &splitInicio, &splitMedio);
+DList dlist_mergeSort(DList lista, Comparacion c){
+  // El calculo del largo tal vez se tendria que incluir en la lista.
+  int* largoP = malloc(sizeof(int));
+  dlist_recorrer(lista, contar_largo, largoP);
+  int largo = *largoP;
+  //------------------
+  Stack stack = stack_new(largo);
+  Stack stackOrdenadas = stack_new(largo);
+  stack_push(stack, lista);
+  // Primera etapa, colocar en stackOrdenadas listas ordenadas.
+  while (stack_isEmpty(stack) == 0) {
+    DList primero = stack_top(stack);
+    stack_pop(stack);
+    if (primero->sig == NULL) {
+      if (stack_isEmpty(stack) == 1) {
+        stack_push(stackOrdenadas, primero);
+      } else {
+        DList segundo = stack_top(stack);
+        stack_pop(stack);
+        if (segundo->sig == NULL) {
+          primero = dlist_merge(primero, segundo, c);
+          stack_push(stackOrdenadas, primero);
+        } else {
+          DList mitad = dlist_split(segundo);
+          stack_push(stack, segundo);
+          stack_push(stack, mitad);
+          stack_push(stack, primero);
+        }
+      }
+    } else {
+      DList mitad = dlist_split(primero);
+      stack_push(stack, mitad);
+      stack_push(stack, primero);
+    }
+  }
 
-  dlist_mergeSortCall(&splitInicio, c);
-  dlist_mergeSortCall(&splitMedio, c);
 
-  *primero = dlist_mergeSortAux(splitInicio, splitMedio, c);
+
+  // Segunda etapa junatar las listas ordenadas.
+  while (!(stack_isEmpty(stack) && stack_unoSolo(stackOrdenadas)) && !(stack_isEmpty(stackOrdenadas) && stack_unoSolo(stack))) {
+      while (!stack_isEmpty(stackOrdenadas)) {
+        if (stack_unoSolo(stackOrdenadas)) {
+          DList primer2 = stack_top(stackOrdenadas);
+
+          stack_push(stack, primer2);
+          stack_pop(stackOrdenadas);
+        } else {
+          DList primer = stack_top(stackOrdenadas);
+          stack_pop(stackOrdenadas);
+
+          DList segun = stack_top(stackOrdenadas);
+          stack_pop(stackOrdenadas);
+
+          primer =  dlist_merge(primer,segun, c);
+
+          stack_push(stack, primer);
+        }
+      }
+
+      while (!stack_isEmpty(stack)) {
+        if (stack_unoSolo(stack)) {
+          stack_push(stackOrdenadas, stack_top(stack));
+          stack_pop(stack);
+        } else {
+          DList primerS = stack_top(stack);
+          stack_pop(stack);
+
+          DList segunS = stack_top(stack);
+          stack_pop(stack);
+
+          DList primerSs =  dlist_merge(primerS,segunS, c);
+
+          stack_push(stackOrdenadas, primerSs);
+        }
+      }
+  }
+  DList result;
+  if (stack_isEmpty(stack))
+    result = stack_top(stackOrdenadas);
+  if (stack_isEmpty(stackOrdenadas))
+    result = stack_top(stack);
+  stack_destruir(stack);
+  stack_destruir(stackOrdenadas);
+  return result;
+
 }
 
-void dlist_mergeSort(DList lista, Compara c) {
-  dlist_mergeSortCall(&lista.primero, c);
-}
+
+
+
