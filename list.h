@@ -1,6 +1,5 @@
 #ifndef LIST_H_INLCUDED
 #define LIST_H_INLCUDED
-#include "stack.h"
 
 // Estructura que representa un nodo en la lista enlazada,
 // cuyo dato es una personta
@@ -40,18 +39,19 @@ void dlist_intercambiar(DNodo*, DNodo*);
 // puntero DNodo, el cual es el comienzo de la segunda.
 DList dlist_split(DList);
 
-// Une dos listas cuyo primer elemento cumple una condicion.
-DList dlist_merge(DList, DList, Comparacion);
-
 // Funciones de ordenamiento:
 
 // dlist_selectionSort: implementacion del algoritmo selection sort
 // en listas doblemente enlazadas.
-void dlist_selectionSort(DList, Comparacion);
+DList dlist_selectionSort(DList, Comparacion);
 
 // dlist_insertionSort: implementacion del algoritmo insertion sort
 // en listas doblemente enlazadas.
-void dlist_insertionSort(DList, Comparacion);
+DList dlist_insertionSort(DList, Comparacion);
+
+// dlist_merge: une dos listas cuyo primer elemento cumple una condicion 
+// Funcion auxiliar de mergeSort.
+DList dlist_merge(DList, DList, Comparacion);
 
 // dlist_mergeSort: implementacion del algoritmo merge sort en listas
 DList dlist_mergeSort(DList, Comparacion);

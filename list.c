@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
-#include "stack.h"
 
 struct _DNodo {
   void* dato;
@@ -29,7 +28,9 @@ DList dnodo_agregar_inicio(DList lista, void* dato) {
     return nuevo;
   } else {
     // Caso lista con elementos.
+    // Creo un nuevo nodo
     DNodo* nuevo = dnodo_crear(dato, NULL, lista);
+    // El antiguo primer elemento ahora es el segundo, asi que le asigno su ant.
     lista->ant = nuevo;
     return nuevo;
   }
@@ -48,6 +49,7 @@ void dlist_destruir (DList lista, Visitante liberar) {
   DNodo* proximo = lista;
   DNodo* actual;
   for (; proximo != NULL ; ) {
+    // Guardo un puntero al nodo actual, me muevo al siguiente y libero.
     actual = proximo;
     proximo = proximo->sig;
     liberar(actual->dato, NULL);
@@ -56,85 +58,93 @@ void dlist_destruir (DList lista, Visitante liberar) {
 }
 
 void dlist_intercambiar(DNodo* nodoA, DNodo* nodoB) {
+  // Intercambio los punteros de los nodos que contienen los datos.
   void* nodoC = nodoB->dato;
   nodoB->dato = nodoA->dato;
   nodoA->dato = nodoC;
 }
 
-
-void dlist_selectionSort(DList lista, Comparacion c) {
+DList dlist_selectionSort(DList lista, Comparacion c) { 
   DNodo* nodo = lista;
-  for (;nodo != NULL; nodo = nodo->sig) {
-    DNodo* nodo2 = lista;
+  for (;nodo->sig != NULL; nodo = nodo->sig) {
+    // Guardo en aux el nodo que tenga el dato menor segun la comparacion.
+    DNodo* aux = nodo;
+    // Itero sobre el siguiente elemento de la lista
+    DNodo* nodo2 = nodo->sig;
     for (;nodo2 != NULL; nodo2 = nodo2->sig) {
-      if (c(nodo->dato, nodo2->dato)) {
-        dlist_intercambiar(nodo, nodo2);
-      }
+      // Si el nodo sobre el que se itera es menor al guardado, lo guardo.
+      if (c(nodo2->dato, aux->dato)) 
+        aux = nodo2;
+    }
+    // Si hubo cambios en el nodo auxiliar, entonces intercambio los valores.
+    if (aux != nodo){
+      dlist_intercambiar(nodo, aux);
     }
   }
+  return lista;
 }
 
-void dlist_insertionSort(DList lista, Comparacion c) {
-  DNodo* nodo, * nodo2, * aux;
-
-  void* datoG;
-  int entro = 0;
-
+DList dlist_insertionSort(DList lista, Comparacion c) {
+  DNodo* nodo, * nodo2;
   for (nodo = lista->sig; nodo != NULL; nodo = nodo->sig) {
-    datoG = nodo->dato;
-    for (nodo2 = nodo->ant; nodo2 != NULL && !(c(nodo2->dato, datoG)); nodo2 = nodo2->ant) {
+    void* dato = nodo->dato;
+    // Recorro los nodos hacia atras hasta encontrar
+    // uno con su dato menor al del dato guardado
+    for (nodo2 = nodo->ant; nodo2 && !c(nodo2->dato, dato); nodo2 = nodo2->ant)
+      // Muevo el valor de nodo2 un lugar hacia atras ya que es mayor.
       nodo2->sig->dato = nodo2->dato;
-      aux = nodo2;
-      entro = 1;
-    }
-    if (entro == 1) {
-      aux->dato = datoG;
-      entro = 0;
-    } else
-      nodo2->sig->dato = datoG;
+    // Ahora debemos colocar el dato es su posicion.
+    // En el caso que el for anterior haya recorrido hasta nodo2=NULL, el dato
+    // sera colocado en la 1ra posicion de la lista.
+    // En caso contrario, se coloca en su posicion adecuada.
+    if (!nodo2)
+      lista->dato = dato;
+    else
+      nodo2->sig->dato = dato;
   }
+  return lista;
 }
-
 
 DList dlist_split(DList primero) {
-    DList fast = primero;
-    DList slow = primero;
-    while (fast->sig && fast->sig->sig)
-    {
-        fast = fast->sig->sig;
-        slow = slow->sig;
-    }
-    DList temp = slow->sig;
-    slow->sig = NULL;
-    temp->ant = NULL;
-    return temp;
+  // Separo la lista a la mitad mediante el metodo de puntero lento/rapido
+  DList rapido = primero;
+  DList lento = primero;
+  while (rapido->sig && rapido->sig->sig) {
+    rapido = rapido->sig->sig;
+    lento = lento->sig;
+  }
+  DList aux = lento->sig;
+  lento->sig = NULL;
+  aux->ant = NULL;
+  return aux;
 }
 
-
-
-  void a1(int * h, void * a){
-  printf("%d", *h);
-}
-
-void contar_largo(DList lista, int * largo) {
-  (*largo)++;
-}
 
 DList dlist_merge(DList lista1, DList lista2, Comparacion c){
-  if (lista1 == NULL) {
+  // Si alguna de las listas en NULL, retorno
+  if (lista1 == NULL) 
     return lista2;
-  }
-  if (lista2 == NULL) {
+  if (lista2 == NULL)
     return lista1;
-  }
-  DList punteroAlInicio = lista1, lista2Aux, lista1Aux;
-  lista1Aux = lista1;
+  // Declaro / inicializo variables auxiliares:
+  // punteroAlInicio: apunta siempre al 1er nodo de la lista (retorno de merge)
+  DList punteroAlInicio = lista1, lista2Aux, lista1Aux = lista1;
+
   while (lista1 != NULL && lista2 != NULL) {
+    // Si el dato de la primera lista es menor al dato de la segunda lista:
     if (c(lista1->dato, lista2->dato)) {
+      // En el caso que sea el ultimo nodo de la primera lista, lo guardamos
+      if (lista1->sig == NULL)
+        lista1Aux = lista1;
+      // Avanzo al siguiente nodo de la primera lista
       lista1 = lista1->sig;
+    // En caso contrario
     } else {
+      // Agregamos el nodo de la segunda lista adelante del nodo de la primera
       lista2Aux = lista2->sig;
       if (lista1->ant == NULL)
+        // Si el nodo de la primera lista es el primero,
+        // actualizamos el puntero al inicio de la lista a retornar 
         punteroAlInicio = lista2;
       lista2->ant = lista1->ant;
       lista2->sig = lista1;
@@ -145,106 +155,28 @@ DList dlist_merge(DList lista1, DList lista2, Comparacion c){
     }
   }
 
+  // En el caso que la segunda lista aun contenga nodos
   if (lista2 != NULL) {
-    // Se debe arreglarrrr para que no recorra otra vez la lista1
-    for (;lista1Aux->sig != NULL; lista1Aux = lista1Aux->sig);
+    // Utilizamos el lista1Aux guardado anteriormente 
+    //para que apunte al resto de la segunda lista 
     lista1Aux->sig = lista2;
     lista2->ant = lista1Aux;
-    return punteroAlInicio;
-  } else {
-    return punteroAlInicio;
   }
-
+  
+  return punteroAlInicio;
 }
 
+DList dlist_mergeSort(DList primero, Comparacion c){
+  // Si la lista tiene 0 o 1 elementos retorno, ya que la lista esta ordenada
+  if (primero==NULL || primero->sig == NULL)
+    return primero;
+  // Separo la lista y guardo el nodo apuntando al comienzo de la segunda lista
+  DList splitMedio = dlist_split(primero);
 
-DList dlist_mergeSort(DList lista, Comparacion c){
-  // El calculo del largo tal vez se tendria que incluir en la lista.
-  int* largoP = malloc(sizeof(int));
-  dlist_recorrer(lista, contar_largo, largoP);
-  int largo = *largoP;
-  //------------------
-  Stack stack = stack_new(largo);
-  Stack stackOrdenadas = stack_new(largo);
-  stack_push(stack, lista);
-  // Primera etapa, colocar en stackOrdenadas listas ordenadas.
-  while (stack_isEmpty(stack) == 0) {
-    DList primero = stack_top(stack);
-    stack_pop(stack);
-    if (primero->sig == NULL) {
-      if (stack_isEmpty(stack) == 1) {
-        stack_push(stackOrdenadas, primero);
-      } else {
-        DList segundo = stack_top(stack);
-        stack_pop(stack);
-        if (segundo->sig == NULL) {
-          primero = dlist_merge(primero, segundo, c);
-          stack_push(stackOrdenadas, primero);
-        } else {
-          DList mitad = dlist_split(segundo);
-          stack_push(stack, segundo);
-          stack_push(stack, mitad);
-          stack_push(stack, primero);
-        }
-      }
-    } else {
-      DList mitad = dlist_split(primero);
-      stack_push(stack, mitad);
-      stack_push(stack, primero);
-    }
-  }
+  // Llamo mergeSort recursivamente sobre ambas listas
+  primero = dlist_mergeSort(primero, c);
+  splitMedio = dlist_mergeSort(splitMedio, c);
 
-
-
-  // Segunda etapa junatar las listas ordenadas.
-  while (!(stack_isEmpty(stack) && stack_unoSolo(stackOrdenadas)) && !(stack_isEmpty(stackOrdenadas) && stack_unoSolo(stack))) {
-      while (!stack_isEmpty(stackOrdenadas)) {
-        if (stack_unoSolo(stackOrdenadas)) {
-          DList primer2 = stack_top(stackOrdenadas);
-
-          stack_push(stack, primer2);
-          stack_pop(stackOrdenadas);
-        } else {
-          DList primer = stack_top(stackOrdenadas);
-          stack_pop(stackOrdenadas);
-
-          DList segun = stack_top(stackOrdenadas);
-          stack_pop(stackOrdenadas);
-
-          primer =  dlist_merge(primer,segun, c);
-
-          stack_push(stack, primer);
-        }
-      }
-
-      while (!stack_isEmpty(stack)) {
-        if (stack_unoSolo(stack)) {
-          stack_push(stackOrdenadas, stack_top(stack));
-          stack_pop(stack);
-        } else {
-          DList primerS = stack_top(stack);
-          stack_pop(stack);
-
-          DList segunS = stack_top(stack);
-          stack_pop(stack);
-
-          DList primerSs =  dlist_merge(primerS,segunS, c);
-
-          stack_push(stackOrdenadas, primerSs);
-        }
-      }
-  }
-  DList result;
-  if (stack_isEmpty(stack))
-    result = stack_top(stackOrdenadas);
-  if (stack_isEmpty(stackOrdenadas))
-    result = stack_top(stack);
-  stack_destruir(stack);
-  stack_destruir(stackOrdenadas);
-  return result;
-
+  // Hago un merge de las listas
+  return dlist_merge(primero, splitMedio, c);
 }
-
-
-
-

@@ -8,23 +8,30 @@
 
 Datos* parser(const char* file) {
   int total_size = 200;
+  // Reservo memoria para la estructura Datos y su array correspondiente.
   Datos* lista = (Datos*)malloc(sizeof(Datos));
   char** array = (char**)malloc(sizeof(char*) * total_size);
+  // Abro el archivo de entrada
   FILE* fp;
   fp = fopen(file, "r");
   int linea;
+  // Recorro hasta llegar al EOF
   for (linea = 0; !feof(fp); linea++) {
+    // Reservo memoria para la linea a leer y leo del archivo
     char* buff = malloc(sizeof(char) * 256);
     if (fscanf(fp, "%255[^\n]\n", buff) != EOF) {
+      // Si no hay mas char* donde guardar la linea, aumento el tamaño 
       if (total_size == linea) {
         total_size *= 2;
         array = (char**)realloc(array, sizeof(char*) * total_size);
       }
+      // Agrego el terminador
       buff[strlen(buff)] = '\0';
       array[linea] = buff;
     }
   }
   fclose(fp);
+  // Guardo los valores y retorno la estructura
   lista->array = array;
   lista->largo = linea;
   return lista;
@@ -39,16 +46,19 @@ void escSalida(Datos* datosNac, Datos* datosPer, const char* file, long cant) {
   FILE* fp;
   fp = fopen(file, "w");
   int i;
+  // Genero valores random para elegir persona, edad y nacimiento
   for (i = 0; i < cant; i++) {
     int ranPer = rand() % datosPer->largo;
     int ranEdad = (rand() % 100) + 1;
     int ranNac = rand() % datosNac->largo;
+    // Escribo la informacion final de la persona
     escritura(fp, datosPer->array[ranPer], ranEdad, datosNac->array[ranNac]);
   }
   fclose(fp);
 }
 
 void freeDatos(Datos* array) {
+  // Recorro el array de datos y libero la memoria
   int i;
   for (i = 0; i < array->largo; i++)
     free(array->array[i]);
@@ -56,10 +66,13 @@ void freeDatos(Datos* array) {
 }
 
 int main(int argc, char* argv[]) {
+  // Parseo los datos de entrada
   Datos* datosNac = parser("datos/paises.txt");
   Datos* datosPer = parser("datos/nombres1.txt");
+  // Transformo en long la cantidad de personas pasada como argumento
   long cant = strtol(argv[1], NULL, 10);
-  escSalida(datosNac, datosPer, "salida.txt", cant);
+  // Escribo el archivo de salida y libero la memoria
+  escSalida(datosNac, datosPer, "personas.txt", cant);
   freeDatos(datosNac);
   freeDatos(datosPer);
   return 0;
