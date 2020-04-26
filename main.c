@@ -37,7 +37,7 @@ void crear_archivo_salida(const char* filenameEntrada, const char* filenameSalid
 
 int main()
 {
-  crear_archivo_salida("personas.txt", "insertion1.txt", dlist_insertionSort, (Comparacion) comparacion_edad);
+  crear_archivo_salida("personas.txt", "insertion1.txt", dlist_mergeSort, (Comparacion) comparacion_edad);
   return 0;
 }
 

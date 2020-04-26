@@ -38,7 +38,7 @@ DList dnodo_agregar_inicio(DList lista, void* dato) {
 
 // Agregado aux, para dar mas posibilidades a la funcion visitante
 // (ejemplo: contar cantidad, imprimir en un archivo).
-void dlist_recorrer(DList lista, Visitante visitante, void * aux) {
+void dlist_recorrer (DList lista, Visitante visitante, void * aux) {
   DNodo* Nsig = lista;
   for (;Nsig != NULL; Nsig = Nsig->sig) {
     visitante(Nsig->dato, aux);
@@ -46,8 +46,8 @@ void dlist_recorrer(DList lista, Visitante visitante, void * aux) {
 }
 
 void dlist_destruir (DList lista, Visitante liberar) {
-  DNodo* proximo = lista;
-  DNodo* actual;
+  DList proximo = lista;
+  DList actual;
   for (; proximo != NULL ; ) {
     // Guardo un puntero al nodo actual, me muevo al siguiente y libero.
     actual = proximo;
@@ -64,7 +64,7 @@ void dlist_intercambiar(DNodo* nodoA, DNodo* nodoB) {
   nodoA->dato = nodoC;
 }
 
-DList dlist_selectionSort(DList lista, Comparacion c) { 
+DList dlist_selectionSort(DList lista, Comparacion c) {
   DNodo* nodo = lista;
   for (;nodo->sig != NULL; nodo = nodo->sig) {
     // Guardo en aux el nodo que tenga el dato menor segun la comparacion.
@@ -73,7 +73,7 @@ DList dlist_selectionSort(DList lista, Comparacion c) {
     DNodo* nodo2 = nodo->sig;
     for (;nodo2 != NULL; nodo2 = nodo2->sig) {
       // Si el nodo sobre el que se itera es menor al guardado, lo guardo.
-      if (c(nodo2->dato, aux->dato)) 
+      if (c(nodo2->dato, aux->dato))
         aux = nodo2;
     }
     // Si hubo cambios en el nodo auxiliar, entonces intercambio los valores.
@@ -122,7 +122,7 @@ DList dlist_split(DList primero) {
 
 DList dlist_merge(DList lista1, DList lista2, Comparacion c){
   // Si alguna de las listas en NULL, retorno
-  if (lista1 == NULL) 
+  if (lista1 == NULL)
     return lista2;
   if (lista2 == NULL)
     return lista1;
@@ -144,7 +144,7 @@ DList dlist_merge(DList lista1, DList lista2, Comparacion c){
       lista2Aux = lista2->sig;
       if (lista1->ant == NULL)
         // Si el nodo de la primera lista es el primero,
-        // actualizamos el puntero al inicio de la lista a retornar 
+        // actualizamos el puntero al inicio de la lista a retornar
         punteroAlInicio = lista2;
       lista2->ant = lista1->ant;
       lista2->sig = lista1;
@@ -157,12 +157,12 @@ DList dlist_merge(DList lista1, DList lista2, Comparacion c){
 
   // En el caso que la segunda lista aun contenga nodos
   if (lista2 != NULL) {
-    // Utilizamos el lista1Aux guardado anteriormente 
-    //para que apunte al resto de la segunda lista 
+    // Utilizamos el lista1Aux guardado anteriormente
+    //para que apunte al resto de la segunda lista
     lista1Aux->sig = lista2;
     lista2->ant = lista1Aux;
   }
-  
+
   return punteroAlInicio;
 }
 

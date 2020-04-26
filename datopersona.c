@@ -43,6 +43,7 @@ DList dlist_leer_crear(const char* filename) {
 
   lista = dnodo_agregar_inicio(lista, persona_crear(nombre, edadE, lugar));
   }
+  fclose(fp);
   free(edad);
   return lista;
 }

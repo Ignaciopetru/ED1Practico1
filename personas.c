@@ -18,8 +18,8 @@ Datos* parser(const char* file) {
   // Recorro hasta llegar al EOF
   for (linea = 0; !feof(fp); linea++) {
     // Reservo memoria para la linea a leer y leo del archivo
-    char* buff = malloc(sizeof(char) * 256);
-    if (fscanf(fp, "%255[^\n]\n", buff) != EOF) {
+    char* buff = malloc(sizeof(char) * 64);
+    if (fscanf(fp, "%63[^\n]\n", buff) != EOF) {
       // Si no hay mas char* donde guardar la linea, aumento el tamaño 
       if (total_size == linea) {
         total_size *= 2;
@@ -32,6 +32,9 @@ Datos* parser(const char* file) {
   }
   fclose(fp);
   // Guardo los valores y retorno la estructura
+  /*for (int i = linea; i < total_size; i++)
+    free(array[i]);
+  array = (char**)realloc(array, sizeof(char*) * linea);*/
   lista->array = array;
   lista->largo = linea;
   return lista;
@@ -62,6 +65,7 @@ void freeDatos(Datos* array) {
   int i;
   for (i = 0; i < array->largo; i++)
     free(array->array[i]);
+  free(array->array);
   free(array);
 }
 
