@@ -53,10 +53,6 @@ void persona_imprimir(Persona * persona, FILE * fp) {
   fprintf(fp, "%s, %ld, %s\n",persona->nombre, persona->edad, persona->lugar);
 }
 
-// persona_mostrar es del tipo Visitante
-void persona_mostrar(Persona * persona, void* aux) {
-  printf("%s, %ld, %s\n",persona->nombre, persona->edad, persona->lugar);
-}
 // comparacion_edad es del tipo Comparacion
 int comparacion_edad(Persona* persona1, Persona* persona2) {
   return (persona1->edad <= persona2->edad);

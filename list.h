@@ -49,7 +49,7 @@ DList dlist_selectionSort(DList, Comparacion);
 // en listas doblemente enlazadas.
 DList dlist_insertionSort(DList, Comparacion);
 
-// dlist_merge: une dos listas cuyo primer elemento cumple una condicion 
+// dlist_merge: une dos listas cuyo primer elemento cumple una condicion
 // Funcion auxiliar de mergeSort.
 DList dlist_merge(DList, DList, Comparacion);
 

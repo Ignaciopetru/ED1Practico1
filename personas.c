@@ -32,9 +32,6 @@ Datos* parser(const char* file) {
   }
   fclose(fp);
   // Guardo los valores y retorno la estructura
-  /*for (int i = linea; i < total_size; i++)
-    free(array[i]);
-  array = (char**)realloc(array, sizeof(char*) * linea);*/
   lista->array = array;
   lista->largo = linea;
   return lista;
