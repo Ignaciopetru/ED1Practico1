@@ -45,11 +45,10 @@ void dlist_recorrer (DList lista, Visitante visitante, void * aux) {
   }
 }
 
-DList dlist_duplicar (DList lista) {
+DList dlist_duplicar_rotar (DList lista) {
   DList nueva = dlist_crear();
   DNodo* Nsig = lista;
-  for (;Nsig->sig != NULL; Nsig = Nsig->sig);
-  for (; Nsig != NULL; Nsig = Nsig->ant) {
+  for (; Nsig != NULL; Nsig = Nsig->sig) {
     nueva = dnodo_agregar_inicio(nueva, Nsig->dato);
   }
   return nueva;

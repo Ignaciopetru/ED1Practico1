@@ -7,8 +7,8 @@ CARLOS GARBANZO, 24, Riad
 MARIA CECILIA ZUÑIGA, 31, Trípoli
 MIRIAM MEJIA, 37, Eslovenia
 EDUARDO PALMA, 39, Marruecos
-ZOILA MARIA LOAIZA, 44, Qatar
 OVIDIO TORRES, 44, Isla Pitcairn
+ZOILA MARIA LOAIZA, 44, Qatar
 ORLANDO GERARDO HEILBRON, 46, Uagadugú
 ANTONIO AGUILAR, 50, San Marino
 JOSE GERARDO CASTRO, 51, Nasáu
@@ -53,8 +53,8 @@ CARLOS GARBANZO, 24, Riad
 MARIA CECILIA ZUÑIGA, 31, Trípoli
 MIRIAM MEJIA, 37, Eslovenia
 EDUARDO PALMA, 39, Marruecos
-OVIDIO TORRES, 44, Isla Pitcairn
 ZOILA MARIA LOAIZA, 44, Qatar
+OVIDIO TORRES, 44, Isla Pitcairn
 ORLANDO GERARDO HEILBRON, 46, Uagadugú
 ANTONIO AGUILAR, 50, San Marino
 JOSE GERARDO CASTRO, 51, Nasáu
@@ -99,8 +99,8 @@ CARLOS GARBANZO, 24, Riad
 MARIA CECILIA ZUÑIGA, 31, Trípoli
 MIRIAM MEJIA, 37, Eslovenia
 EDUARDO PALMA, 39, Marruecos
-OVIDIO TORRES, 44, Isla Pitcairn
 ZOILA MARIA LOAIZA, 44, Qatar
+OVIDIO TORRES, 44, Isla Pitcairn
 ORLANDO GERARDO HEILBRON, 46, Uagadugú
 ANTONIO AGUILAR, 50, San Marino
 JOSE GERARDO CASTRO, 51, Nasáu
@@ -141,6 +141,6 @@ La lista tenia 20 elementos
 
 Resumen:
 Algoritmo | por edad | por nombre
- Selecion   0.000003s   0.000028s
- Insertion  0.000003s   0.000028s
- Merge      0.000003s   0.000028s
+ Selecion   0.000003s   0.000003s
+ Insertion  0.000003s   0.000003s
+ Merge      0.000003s   0.000003s

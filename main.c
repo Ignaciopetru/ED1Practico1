@@ -36,34 +36,38 @@ int main(int argc, char* argv[]) {
   // argv 1 archivo entrada
   // argv 2 archivo salida1
 
-  // Cargamos la informacion en la lista
+  // Cargamos la informacion en la lista, la lista posee la
+  // informacion en orden inverso a la del archivo
+
   DList lista = dlist_leer_crear(argv[1]);
 
   double tiempos[6];
   // Abrimos archivo.
   FILE *fp = fopen(argv[2], "w");
 
-  DList nueva = dlist_duplicar(lista);
+
+  // Al duplicar se queda correctamente.
+  DList nueva = dlist_duplicar_rotar(lista);
   tiempos[0] = crear_salida(nueva, dlist_selectionSort, (Comparacion) comparacion_edad, "selection con la comparacion por edad", fp);
   dlist_destruir(nueva, NULL);
 
-  nueva = dlist_duplicar(lista);
+  nueva = dlist_duplicar_rotar(lista);
   tiempos[1] = crear_salida(nueva, dlist_selectionSort, (Comparacion) comparacion_nombre, "selection con la comparacion por nombre", fp);
   dlist_destruir(nueva, NULL);
 
-  nueva = dlist_duplicar(lista);
+  nueva = dlist_duplicar_rotar(lista);
   tiempos[2] = crear_salida(nueva, dlist_insertionSort, (Comparacion) comparacion_edad, "insertion con la comparacion por edad", fp);
   dlist_destruir(nueva, NULL);
 
-  nueva = dlist_duplicar(lista);
+  nueva = dlist_duplicar_rotar(lista);
   tiempos[3] = crear_salida(nueva, dlist_insertionSort, (Comparacion) comparacion_nombre, "insertion con la comparacion por nombre", fp);
   dlist_destruir(nueva, NULL);
 
-  nueva = dlist_duplicar(lista);
+  nueva = dlist_duplicar_rotar(lista);
   tiempos[4] = crear_salida(nueva, dlist_mergeSort, (Comparacion) comparacion_edad, "merge con la comparacion por edad", fp);
   dlist_destruir(nueva, NULL);
 
-  nueva = dlist_duplicar(lista);
+  nueva = dlist_duplicar_rotar(lista);
   tiempos[5] = crear_salida(nueva, dlist_mergeSort, (Comparacion) comparacion_nombre, "merge con la comparacion por nombre", fp);
   dlist_destruir(nueva, NULL);
 
