@@ -4,9 +4,9 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include <time.h>
-#include "personas.h"
+#include "cabeceras/personas.h"
 
-Datos* parser(const char* file) {
+Datos* parser(char* file) {
   int total_size = 200;
   // Reservo memoria para la estructura Datos y su array correspondiente.
   Datos* lista = (Datos*)malloc(sizeof(Datos));
@@ -41,14 +41,14 @@ void escritura(FILE* fp, char* first, int second, char* third) {
   fprintf(fp, "%s, %d, %s\n", first, second, third);
 }
 
-void escSalida(Datos* datosNac, Datos* datosPer, const char* file, long cant) {
+void escSalida(Datos* datosNac, Datos* datosPer, char* file, long cant) {
   srand(time(NULL));
   FILE* fp;
   fp = fopen(file, "w");
   int i;
   // Genero valores random para elegir persona, edad y nacimiento
   for (i = 0; i < cant; i++) {
-    int ranPer = rand() % datosPer->largo;
+    int ranPer = (rand() * rand()) % datosPer->largo;
     int ranEdad = (rand() % 100) + 1;
     int ranNac = rand() % datosNac->largo;
     // Escribo la informacion final de la persona
@@ -68,12 +68,12 @@ void freeDatos(Datos* array) {
 
 int main(int argc, char* argv[]) {
   // Parseo los datos de entrada
-  Datos* datosNac = parser("datos/paises.txt");
-  Datos* datosPer = parser("datos/nombres1.txt");
+  Datos* datosPer = parser(argv[1]);
+  Datos* datosNac = parser(argv[2]);
   // Transformo en long la cantidad de personas pasada como argumento
-  long cant = strtol(argv[1], NULL, 10);
+  long cant = strtol(argv[4], NULL, 10);
   // Escribo el archivo de salida y libero la memoria
-  escSalida(datosNac, datosPer, "personas.txt", cant);
+  escSalida(datosNac, datosPer, argv[3], cant);
   freeDatos(datosNac);
   freeDatos(datosPer);
   return 0;

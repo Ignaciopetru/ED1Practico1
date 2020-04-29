@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include "list.h"
-#include "datopersona.h"
+#include "cabeceras/dlist.h"
+#include "cabeceras/datopersona.h"
 
 
 

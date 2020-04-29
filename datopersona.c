@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "list.h"
-#include "datopersona.h"
+#include "cabeceras/dlist.h"
+#include "cabeceras/datopersona.h"
 
 struct _Persona {
   char* nombre, * lugar;

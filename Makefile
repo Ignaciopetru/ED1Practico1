@@ -1,15 +1,15 @@
 all: master personas
 
-master: list.o datopersona.o main.c
-	gcc -o master main.c list.o datopersona.o
+master: dlist.o datopersona.o main.c
+	gcc -o master main.c dlist.o datopersona.o
 
-datopersona.o: list.h datopersona.h datopersona.c
+datopersona.o: cabeceras/dlist.h cabeceras/datopersona.h datopersona.c
 	gcc -c datopersona.c
 
-list.o: list.c list.h
-	gcc -c list.c
+dlist.o: dlist.c cabeceras/dlist.h
+	gcc -c dlist.c
 
-personas: personas.c personas.h
+personas: personas.c cabeceras/personas.h
 	gcc -o personas personas.c
 
 clean:
