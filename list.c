@@ -45,6 +45,17 @@ void dlist_recorrer (DList lista, Visitante visitante, void * aux) {
   }
 }
 
+DList dlist_duplicar (DList lista) {
+  DList nueva = dlist_crear();
+  DNodo* Nsig = lista;
+  for (;Nsig->sig != NULL; Nsig = Nsig->sig);
+  for (; Nsig != NULL; Nsig = Nsig->ant) {
+    nueva = dnodo_agregar_inicio(nueva, Nsig->dato);
+  }
+  return nueva;
+}
+
+
 void dlist_destruir (DList lista, Visitante liberar) {
   DList proximo = lista;
   DList actual;
@@ -52,7 +63,8 @@ void dlist_destruir (DList lista, Visitante liberar) {
     // Guardo un puntero al nodo actual, me muevo al siguiente y libero.
     actual = proximo;
     proximo = proximo->sig;
-    liberar(actual->dato, NULL);
+    if (liberar != NULL)
+      liberar(actual->dato, NULL);
     free(actual);
   }
 }

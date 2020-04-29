@@ -1,100 +1,20 @@
-HERNANDEZ, 51, Ecuador
-ARRIA, 36, Belice
-GEL GUTIE, 6, del Nort
-FLORA UMA, 26, Sudáfric
-UEL CASTR, 58, Isla Man
-CLEMENTIN, 7, s
-GADO, 34, a Guinea
-TONIO MEJ, 35, Kingston
-VA, 56, �n
-A LOPEZ, 28, España
-CORDERO, 3, Taskent
-EFRAIN CH, 68, ental
-SARA RODR, 21, Luanda
-LLOA, 46, San Marin
-ANDO MOLI, 56, Macedonia
-MARIA EUG, 71, Birmania
-A CANTILL, 55, Georgetow
-ANDEZ, 83, s
-XIS BOLA�, 16, Fidji
-NUEL ARRO, 23, Libia
-VIRGINIA , 84, Norfolk I
-A, 55, Malí
-CHO, 2, Belmopán
-MARIA DE , 76, y Prínci
-Z, 73, Maputo
-GEL SANCH, 12, Estados F
-CLAUDINO , 91, Micronesi
-LUIS ALBE, 20, edonia
-EDONIA AG, 93, Bosnia-He
-ACUÑA, 90, Hanói
-RTILLA, 64, a
-LUISA ELE, 18, aña
-RON, 86, fricana
-YOLANDA C, 27, Yamena
-CADO, 18, Macedonia
-SONIA MAR, 15, Bogotá
-TENO, 77, Bagdad
-MYRIAM SO, 37, Islas Tur
-GAS, 81, Malabo
-ONA, 66, Brasil
-EON, 70, Singapur
-MARGARITA, 96, Polinesia
-NELSON CA, 63, Abuya
-ÑIGA, 87, Austria
-ESA VARGA, 69, pa
-HEZ, 12, e
-UDIA CHAV, 36, Isla Chri
-JESUS ZU�, 50, Vietnam
-A CHAVES, 85, Emiratos 
-ANA VIRGI, 56, Jordania
-O AGUILAR, 39, Mauricio
-ODILON AN, 64, avidad
-LOAIZA, 90, Tirana
-A, 14, Beirut
-VARRO, 69, Noruega
-BETTY POR, 26, Caracas
-Z, 49, Nueva Del
-LAS, 28, e
-ENEIDA FE, 83, dico
-VICTOR HU, 10, n Este
-MARIANO J, 99, ssau
-MARGARITA, 12, Bahamas
-SILVIA PA, 72, Puerto Ri
-ILIA DOBL, 63, íncipe
-TERESA RI, 12, Teherán
-VICTOR ED, 40, ty
-EDGAR CHA, 9, Macao
-MARCOS AR, 99, México
-INO SANDI, 46, Ottawa
-AS, 30, Malí
-LIA GUERR, 69, l Vatican
-VIRGINIA , 32, Malasia
-ASTRO, 17, Zimbabwe
-RCUYO, 34, Nueva Zel
-ILLALOBOS, 74, Somalia
-GAS, 53, Windhoek
-IREZ, 33, Beirut
-N FLORES, 3, Wallis y 
-FERNANDO , 10, Zambia
-PEÑARAND, 92, Guinea Bi
-SOCORRO B, 51, Repúblic
-ESADA, 29, Librevill
-BERTO FON, 90, Lima
-ANA ISABE, 23, Pretoria
-AMALIA GE, 40, Camerún
-CORDERO, 67, Etiopía
-BERTO TOR, 23, a Guinea
-JUAN RAMO, 66, n
-AÑOS, 66, Suecia
-MARIA MAY, 62, Ottawa
-FRANKLIN , 11, Islas de 
-GILBERTO , 64, Yamena
-RALES, 84, obal y Ne
-IS MIRAND, 90, Azerbaiy�
-JOSE MANU, 48, Bratislav
-RNANDEZ, 17, Perú
-MARIA ELE, 88, Uagadugú
-ARDO CHAV, 21, Palikir
-EGURA, 14, Banglades
-VICTOR MA, 16, Hungría
+ORLANDO GERARDO HEILBRON, 46, Uagadugú
+DINIA ROJAS, 5, Surinam
+HILDA MARIA LOPEZ, 56, Oslo
+MANUEL ENRIQUE JARA, 72, Saná
+ANTONIO AGUILAR, 50, San Marino
+ZOILA MARIA LOAIZA, 44, Qatar
+CONSUELO VINDAS, 82, Dakar
+JUAN JOSE VILLALTA, 76, Reunión
+MIRIAM MEJIA, 37, Eslovenia
+MARIA CECILIA ZUÑIGA, 31, Trípoli
+EDUARDO PALMA, 39, Marruecos
+CARLOS GARBANZO, 24, Riad
+OSVALDO ACUÑA, 62, Malé
+SARA ULLOA, 97, Territorio Británico del Océano Indico
+CECILIA MATAMOROS, 1, Reikiavik
+NURIA PORRAS, 81, Gibraltar
+JOSE GERARDO CASTRO, 51, Nasáu
+FLORIA SABORIO, 60, Pekín
+VIRGINIA BENAVIDES, 88, Gaborone
+OVIDIO TORRES, 44, Isla Pitcairn

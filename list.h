@@ -29,6 +29,9 @@ DList dnodo_agregar_inicio(DList, void*);
 // dnodo_agregar imprime los datos guardados en la lista.
 void dlist_recorrer(DList, Visitante, void*);
 
+// dlist_duplicar duplicar una lista devolviendo el puntero al nodo 1.
+DList dlist_duplicar (DList);
+
 // dlist_destruir se encarga de liberar la memoria dedicada a la lista.
 void dlist_destruir (DList, Visitante);
 
